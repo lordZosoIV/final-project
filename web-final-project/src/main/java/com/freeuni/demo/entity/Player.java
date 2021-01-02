@@ -23,28 +23,34 @@ public class Player {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 
-    private Integer shirtNumber;
+    private String shirtNumber;
 
     private String name;
-
 
     private String position;
 
     private String nationality;
 
-    private Integer appearances;
+    private String appearances;
 
-    private Integer effectiveness;
+    private String cleanSheets;
 
-    private Integer teamId;
+    private String goals;
 
-    public Player(int shirtNumber, String name, String position, String nationality, int appearances, int effectiveness, int teamId) {
+    private String assists;
+
+    private String teamId;
+
+    public Player(String shirtNumber, String name, String position, String nationality, String appearances,
+                  String cleanSheets, String assists, String goals, String teamId) {
         this.shirtNumber = shirtNumber;
         this.name = name;
         this.position = position;
         this.nationality = nationality;
         this.appearances = appearances;
-        this.effectiveness = effectiveness;
+        this.cleanSheets = cleanSheets;
+        this.assists = assists;
+        this.goals = goals;
         this.teamId = teamId;
     }
 }
