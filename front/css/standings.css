@@ -1,0 +1,128 @@
+.table {
+    width: 30%;
+    background-color: lightsteelblue;
+}
+
+.table-header {
+    margin-top: 5%;
+    width: 100%;
+    height: 10%;
+    background: #ff2882;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.styled-table {
+    width: 70%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    border: 1px;
+    border-color: black;
+}
+
+.styled-table thead tr {
+    width: 100%;
+    /* background: #ff2882; */
+    /* text-align: center; */
+}
+
+.styled-table th {
+    color: #6c6c6c;
+    padding: 4px 2px;
+}
+
+.styled-table td {
+    padding: 4px 2px;
+    z-index: 5000;
+    /* text-align: center; */
+}
+
+.styled-table td:hover {
+    transform: scale(1.3);
+}
+
+
+/* .styled-table td {
+    padding: 4px 2px;
+} */
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+
+/* .styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+} */
+
+
+/* .styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+} */
+
+
+/* .styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+} */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* The Modal (background) */
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+
+/* Modal Content */
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+
+/* The Close Button */
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}

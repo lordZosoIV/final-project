@@ -1,11 +1,7 @@
     // document.getElementById('btn').addEventListener('click', function(e) {
     //     alert("givi magaria")
     // })
-    const teams = ['Arsenal', 'Aston Villa', 'brightonandhovealbion', 'burnley', 'chelsea',
-        'crystalpalace', 'everton', 'fulham', 'leedsunited', 'leicester', 'liverpool',
-        'manchestercity', 'manchesterunited', 'newcastleunited', 'sheffield', 'southampton', 'tottenham',
-        'westBromwich', 'westHam', 'wolves'
-    ]
+
 
     const teamSites = ["https://www.arsenal.com/?utm_source=premier-league-website&utm_campaign=website&utm_medium=link",
         "https://www.avfc.co.uk/?utm_source=premier-league-website&utm_campaign=website&utm_medium=link",
@@ -29,11 +25,13 @@
         "https://www.wolves.co.uk/?utm_source=premier-league-website&utm_campaign=website&utm_medium=link"
     ]
 
-    function loadTeamLogos() {
+    async function loadTeamLogos() {
+        const url = 'http://localhost:8080/getAllTeams';
+        let resp = await getTeams(url);
         let elem = document.getElementById("logosBar")
         let html = '';
-        for (i = 0; i < teams.length; i++) {
-            html += '<a href=' + teamSites[i] + ' target="_blank"><img class="logo" src="../data/logo/' + teams[i] + '.png"></img></a>'
+        for (i = 0; i < resp.length; i++) {
+            html += '<a href=' + teamSites[i] + ' target="_blank"><img class="logo" src="../data/logo/' + resp[i].teamName + '.png"></img></a>'
         }
         elem.innerHTML = html
     }
@@ -44,7 +42,6 @@
 
     // var request = new XMLHttpRequest();
     // request.open('GET', 'http://localhost:8080/getAllTeams', true);
-    const url = 'http://localhost:8080/getAllTeams';
 
     function get(url) {
         return new Promise(function(resolve, reject) {
@@ -64,7 +61,7 @@
         });
     }
 
-    async function getTeams() {
+    async function getTeams(url) {
         return await get(url).then(function(response) {
             console.log("fetch teams successed");
             response = JSON.parse(response)
@@ -77,9 +74,10 @@
 
 
     async function loadTeamsDropDown() {
+        const url = 'http://localhost:8080/getAllTeams';
         let elem = document.getElementById("dropdown-content")
         console.log(elem)
-        let resp = await getTeams();
+        let resp = await getTeams(url);
         console.log(resp)
         let html = '';
         for (i = 0; i < resp.length; i++) {
