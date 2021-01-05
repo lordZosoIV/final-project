@@ -24,9 +24,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @CrossOrigin("*")
@@ -39,7 +37,6 @@ public class MainController {
     public void setMatchRepository(MatchRepo matchRepo) {
         this.matchRepo = matchRepo;
     }
-
 
 
     @Autowired
@@ -68,8 +65,8 @@ public class MainController {
     }
 
     @GetMapping(path = "/getAllPlayers")
-    public List<Player> getAllPlayers(){
-        if(playerRepo.count() == 0) {
+    public List<Player> getAllPlayers() {
+        if (playerRepo.count() == 0) {
             try {
                 fetchPlayers();
             } catch (IOException e) {
@@ -79,21 +76,43 @@ public class MainController {
         return playerRepo.findAll();
     }
 
+    @GetMapping(value = "/getMatchDay/{id}")
+    public List<Match> getMatchDay(@PathVariable Long id) {
+        List<Match>  res = matchRepo.getMatchByMatchDayOrderByFirstTeamId(id);
+        List<Match> r = new ArrayList<>();
+        for (int i = 0; i < res.size(); i++) {
+            if (1 == i % 2)
+                r.add(res.get(i));
+        }
+        return r;
+    }
+
+    @GetMapping(value = "/getTeamMatches/{id}")
+    public List<Match> getTeamMatches(@PathVariable Integer id) {
+        List<Match> res = matchRepo.getMatchByFirstTeamIdOrSecondTeamIdOrderByMatchDayDesc(id, id);
+        List<Match> r = new ArrayList<>();
+        for (int i = 0; i < res.size(); i++) {
+            if (1 == i % 2)
+                r.add(res.get(i));
+        }
+        return r;
+    }
+
     private void addMatches() throws IOException, ParseException {
-        for(int i = 0; i < 20; i++)
-                add(i);
+        for (int i = 0; i < 20; i++)
+            add(i);
     }
 
     private void add(int indx) throws IOException, ParseException {
         Path currentRelativePath = Paths.get("");
         String s = currentRelativePath.toAbsolutePath().toString();
-        Object obj = new JSONParser().parse(new FileReader(s + "/src/main/resources/"+ ContentConstants.teams.get(indx) + " Matches.json"));
+        Object obj = new JSONParser().parse(new FileReader(s + "/src/main/resources/" + ContentConstants.teams.get(indx) + " Matches.json"));
 
         JSONObject jo = (JSONObject) obj;
 
         JSONArray content = (JSONArray) jo.get("content");
 
-        for(Object fixture: content){
+        for (Object fixture : content) {
             JSONObject j = (JSONObject) fixture;
             JSONObject jj = (JSONObject) fixture;
             j = (JSONObject) j.get("gameweek");
@@ -103,7 +122,7 @@ public class MainController {
             JSONArray teams = (JSONArray) jj.get("teams");
             ArrayList<Long> scores = new ArrayList<>();
             ArrayList<Integer> teamIds = new ArrayList<>();
-            for(Object team : teams){
+            for (Object team : teams) {
                 JSONObject teamJson = (JSONObject) team;
                 Double score = (Double) teamJson.get("score");
                 scores.add(Math.round(score));
@@ -146,7 +165,7 @@ public class MainController {
     private void wrap(String url, String teamId) throws IOException {
         Document doc = Jsoup.connect(url).get();
         Elements elements = doc.getElementsByClass("playerOverviewCard active");
-        for(Element e: elements) {
+        for (Element e : elements) {
             parseName(e, teamId);
         }
     }
@@ -168,10 +187,10 @@ public class MainController {
         String cleanSheets = "0";
         String assists = "0";
         Elements ell = e.getElementsByTag("dl");
-        for(Element infos: ell){
+        for (Element infos : ell) {
 
             String info = infos.text().substring(0, infos.text().indexOf(' '));
-            switch(info){
+            switch (info) {
                 case "Nationality":
                     String ag = infos.text().substring(infos.text().indexOf(' ') + 1);
                     nationality = ag;
@@ -191,14 +210,14 @@ public class MainController {
 
         }
 
-        if(appearances.equals("0")) return;
+        if (appearances.equals("0")) return;
         Player p = new Player(shirtNumber, name, position, nationality,
                 appearances, cleanSheets, assists, goals, teamId);
         playerRepo.save(p);
     }
 
     private static int first(String str) {
-        for(int i = 0; i < str.length(); i++) {
+        for (int i = 0; i < str.length(); i++) {
             if (Character.isUpperCase(str.charAt(i))) {
                 return i;
             }
@@ -212,7 +231,6 @@ public class MainController {
         String sub = s.substring(first, last);
         return sub.replace('-', ' ');
     }
-
 
 
 }

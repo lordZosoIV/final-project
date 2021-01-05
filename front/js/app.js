@@ -3,6 +3,8 @@
     // })
 
 
+    const days = [];
+
     const teamSites = ["https://www.arsenal.com/?utm_source=premier-league-website&utm_campaign=website&utm_medium=link",
         "https://www.avfc.co.uk/?utm_source=premier-league-website&utm_campaign=website&utm_medium=link",
         "https://www.brightonandhovealbion.com/?utm_source=premier-league-website&utm_campaign=website&utm_medium=link",
@@ -63,7 +65,6 @@
 
     async function getTeams(url) {
         return await get(url).then(function(response) {
-            console.log("fetch teams successed");
             response = JSON.parse(response)
             return response;
         }, function(error) {
@@ -75,10 +76,8 @@
 
     async function loadTeamsDropDown() {
         const url = 'http://localhost:8080/getAllTeams';
-        let elem = document.getElementById("dropdown-content")
-        console.log(elem)
+        let elem = document.getElementById("dropdown-content-clubs")
         let resp = await getTeams(url);
-        console.log(resp)
         let html = '';
         for (i = 0; i < resp.length; i++) {
             html += '<a href="s" id=menuTeamIndex' + resp[i].id + ' style="font-size: small;">' + resp[i].teamName + '</a><br>';
@@ -88,3 +87,22 @@
 
 
     loadTeamsDropDown();
+
+
+
+
+    async function loadMatchDaysDropDown() {
+        for (i = 1; i < 18; i++) {
+            days.push("matchDay " + i);
+        }
+        let elem = document.getElementById("dropdown-content-matchDays")
+        let html = '';
+        for (i = 0; i < days.length; i++) {
+            html += '<a href="s" id=menu' + days[i] + ' style="font-size: small;">' + days[i] + '</a><br>';
+        }
+        elem.innerHTML = html
+    }
+
+
+
+    loadMatchDaysDropDown();

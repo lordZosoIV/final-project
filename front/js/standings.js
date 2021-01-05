@@ -1,9 +1,7 @@
 async function addTable() {
     const url = 'http://localhost:8080/getAllTeams';
     let resp = await getTeams(url);
-    // console.log(resp)
     let elem = document.getElementById("tableBody");
-    console.log(elem)
     let html = '';
     for (i = 0; i < resp.length; i++) {
         let pos = i;
@@ -16,7 +14,7 @@ async function addTable() {
         }
         let gd = 2 * i;
         let pi = 16;
-        html += '<tr><td>' + pos + '</td><td><img class="logo" src="../data/logo/' + resp[i].teamName + '.png"></img><button id=standing_' + resp[i].id + '>' + team + '</button></td><td>' + pi + '</td><td>' + gd + '</td><td>' + points + '</td></tr>';
+        html += '<tr><td>' + pos + '</td><td><img class="logo" src="../data/logo/' + resp[i].teamName + '.png"></img><div id=standing_' + resp[i].id + '>' + team + '</div></td><td>' + pi + '</td><td>' + gd + '</td><td>' + points + '</td></tr>';
 
 
         // <div id="myModal" class="modal">
@@ -42,7 +40,6 @@ async function addTable() {
 
 
         btn.addEventListener('click', function(event) {
-            // console.log(resp[i].teamName)
             let val = event.target.id;
             let iof = val.indexOf('_');
             let idx = val.substr(iof + 1, val.length - iof)
