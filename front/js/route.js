@@ -1,49 +1,50 @@
-// (function() {
-//     var cache = {};
-
-//     this.tmpl = function tmpl(str, data) {
-//         return str
-//     };
-// })();
+(function() {
+    this.tmpl = function tmpl(str) {
+        return str
+    };
+})();
 
 
 
-// var routes = {};
-// //
-// function route(path, templateId, controller) {
-//     routes[path] = {
-//         templateId: templateId,
-//         controller: controller
-//     };
-// }
-// var el = null;
+var routes = {};
 
-// function router() {
-//     el = el || document.getElementById('view');
-//     var url = location.hash.slice(1) || '/';
-//     var route = routes[url];
-//     if (el && route.controller) {
-//         let others = ["1", "2", "3"]
-//         for (i = 0; i < 3; i++) {
-//             if (others[i] != route.templateId) {
-//                 let e = document.getElementById(others[i]);
-//                 e.style.display = 'none'
-//             }
-//         }
-//         el.innerHTML = tmpl(route.templateId, new route.controller());
-//     }
-// }
-// window.addEventListener('hashchange', router);
-// window.addEventListener('load', router);
+function route(path, templateId, controller) {
+    routes[path] = {
+        templateId: templateId,
+        controller: controller
+    };
+}
+var el = null;
+
+function router() {
+    var url = location.hash.slice(1) || '/';
+    var route = routes[url];
+    var idx = tmpl(route.templateId);
+    el = el || document.getElementsByClassName('supMid')[0];
+    if (el) {
+        renderPage(el, idx);
+    }
+}
+window.addEventListener('hashchange', router);
+window.addEventListener('load', router);
 
 
 
+route('/Home', 0, function() {});
+route('/', 0, function() {});
 
-// route('/', '1', function() {});
-// route('/page1', '2', function() {
-//     this.greeting = 'Hello world!';
-//     this.moreText = 'Bacon ipsum...';
-// });
-// route('/page2', '3', function() {
-//     this.heading = 'I\'m page two!';
-// });
+for (i = 1; i < days.length + 1; i++) {
+    let dayIndex = i - 1;
+    let link = "/" + days[dayIndex]
+    route(link, i, function() {});
+}
+
+
+for (i = 0; i < 20 + 1; i++) {
+    let link = "/team_" + i
+        // let dayIndex = i - 1;
+        // let link = "/" + days[dayIndex]
+    route(link, link, function() {});
+}
+
+route('/Fantasy', 18, function() {});

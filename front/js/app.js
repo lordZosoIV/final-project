@@ -80,7 +80,8 @@
         let resp = await getTeams(url);
         let html = '';
         for (i = 0; i < resp.length; i++) {
-            html += '<a href="s" id=menuTeamIndex' + resp[i].id + ' style="font-size: small;">' + resp[i].teamName + '</a><br>';
+            let link = "#/team_" + resp[i].id
+            html += '<a href=' + link + ' id=menuTeamIndex' + resp[i].id + ' style="font-size: small;">' + resp[i].teamName + '</a><br>';
         }
         elem.innerHTML = html
     }
@@ -93,12 +94,13 @@
 
     async function loadMatchDaysDropDown() {
         for (i = 1; i < 18; i++) {
-            days.push("matchDay " + i);
+            days.push("matchDay_" + i);
         }
         let elem = document.getElementById("dropdown-content-matchDays")
         let html = '';
         for (i = 0; i < days.length; i++) {
-            html += '<a href="s" id=menu' + days[i] + ' style="font-size: small;">' + days[i] + '</a><br>';
+            let link = "#/" + days[i]
+            html += '<a href=' + link + ' id=' + days[i] + ' style="font-size: small;">' + days[i] + '</a><br>';
         }
         elem.innerHTML = html
     }

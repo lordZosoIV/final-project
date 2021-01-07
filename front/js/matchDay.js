@@ -1,6 +1,5 @@
-async function getMatches(url, day) {
+async function getMatchesByPattern(url, day) {
     url += day;
-    console.log(url)
     return await get(url).then(function(response) {
         response = JSON.parse(response)
         return response;
@@ -11,13 +10,24 @@ async function getMatches(url, day) {
 }
 
 
-async function getMatchDay() {
-    for (i = 1; i < days.length; i++) {
-        let matchDay = days[i].substr(days[i].indexOf(' ') + 1, days[i].length - days[i].indexOf(' '))
-        let resp = await getMatches("http://localhost:8080/getMatchDay/", 1);
-        console.log(resp)
+async function getMatches(url, i) {
+    let resp = await getMatchesByPattern(url, i);
+    // console.log(resp)
+    let res = [];
+    for (i = 0; i < resp.length; i++) {
+        let firstTeamScore = resp[i].firstTeamScore
+        let secondTeamScore = resp[i].secondTeamScore
+        let firstTeam = await getTeams("http://localhost:8080/getTeamById/" + resp[i].firstTeamId)
+        firstTeam = firstTeam.teamName
+        let secondTeam = await getTeams("http://localhost:8080/getTeamById/" + resp[i].secondTeamId)
+        secondTeam = secondTeam.teamName
+        res.push({ firstTeam, firstTeamScore, secondTeam, secondTeamScore });
     }
+    return res;
 }
 
 
-getMatchDay();
+
+
+
+// getMatchDay();
