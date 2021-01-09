@@ -59,6 +59,13 @@ public class MainController {
         return teamRepo.findAll();
     }
 
+
+    @GetMapping(value = "/getPlayersByTeamId/{id}")
+    public List<Player> getPlayersByTeamId(@PathVariable String id) {
+        return playerRepo.getPlayersByTeamId(id);
+    }
+
+
     @GetMapping(path = "/getTeamById/{id}")
     public Optional<Team> getTeamById(@PathVariable Integer id) {
         return teamRepo.findById(id);

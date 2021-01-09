@@ -107,6 +107,7 @@
     display: inline-block;
     margin-right: 8%;
     color: white;
+    z-index: 50000000000;
 }
 
 #dropdown-content-clubs {

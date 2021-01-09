@@ -18,15 +18,6 @@ async function addTable() {
         html += '<tr><td>' + pos + '</td><td><img class="logo" src="../data/logo/' + resp[i].teamName + '.png"></img><div id=standing_' + resp[i].id + '>' + team + '</div></td><td>' + pi + '</td><td>' + gd + '</td><td>' + points + '</td></tr>';
 
 
-        // <div id="myModal" class="modal">
-        //     <div class="modal-content">
-        //         <span class="close">&times;</span>
-        //         <p>Some text in the Modal..</p>
-        //     </div>
-
-        // </div>
-
-
     }
     elem.innerHTML = html
     var modal = document.getElementById("myModal");
@@ -64,4 +55,3 @@ async function addTable() {
     }
 
 }
-// addTable();

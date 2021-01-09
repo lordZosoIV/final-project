@@ -1,4 +1,4 @@
-async function getMatchesByPattern(url, day) {
+async function getByURL(url, day) {
     url += day;
     return await get(url).then(function(response) {
         response = JSON.parse(response)
@@ -11,7 +11,7 @@ async function getMatchesByPattern(url, day) {
 
 
 async function getMatches(url, i) {
-    let resp = await getMatchesByPattern(url, i);
+    let resp = await getByURL(url, i);
     // console.log(resp)
     let res = [];
     for (i = 0; i < resp.length; i++) {

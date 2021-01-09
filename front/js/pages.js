@@ -61,12 +61,44 @@ let page1 = (team1, team2, score1, score2) => {
         '                    <tr style="height: 5vh;"></tr>';
 
 
+}
 
 
-
-
-
-
+let page2 = (shirtNumber, name, position, nationality, appearances, cleanSheets, goals, assists) => {
+    return '                <div class="playerCard">' +
+        '                    <div class="squadPlayerHeader">' +
+        '                        <div class="playerCardInfo">' +
+        '                            <span style="font-size: larger;">' + shirtNumber + '</span>' +
+        '                            <h4 style="font-size: larger;' +
+        '                            line-height: 1;">' + name + '</h4>' +
+        '                            <span style="font-size: large;">' + position + '</span>' +
+        '                        </div>' +
+        '                        <img class="player-img" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p80201.png">' +
+        '                    </div>' +
+        '                    <div class="squadPlayerStats">' +
+        '                        <li>' +
+        '                            <div>Country</div>' +
+        '                            <span>' + nationality + '</span>' +
+        '                        </li>' +
+        '                        <li>' +
+        '                            <div>Appearances</div>' +
+        '                            <span>' + appearances + '</span>' +
+        '                        </li>' +
+        '                        <li>' +
+        '                            <div>CleanSheets</div>' +
+        '                            <span>' + cleanSheets + '</span>' +
+        '                        </li>' +
+        '                        <li>' +
+        '                            <div>Goals</div>' +
+        '                            <span>' + goals + '</span>' +
+        '                        </li>' +
+        '                        <li>' +
+        '                            <div>Assists</div>' +
+        '                            <span>' + assists + '</span>' +
+        '                        </li>' +
+        '                    </div>' +
+        '                </div>' +
+        '';
 
 }
 
@@ -74,7 +106,9 @@ let page1 = (team1, team2, score1, score2) => {
 
 
 
-
+function insert(str, index, value) {
+    return str.substr(0, index) + value + str.substr(index);
+}
 
 
 
@@ -103,33 +137,57 @@ async function renderPage(elem, idx) {
 
         res += '</tbody>' +
             '            </table>' +
-            '' +
-            '' +
-            '' +
             '        </div>';
 
 
         elem.innerHTML = res
-
-    } else {
-        idx = idx.substr(idx.indexOf("_") + 1, idx.length - idx.indexOf("_"))
-        console.log(idx)
-        let matches = await getMatches("http://localhost:8080/getTeamMatches/", idx);
-        matches.map(match => {
-            res += page1(match.firstTeam, match.secondTeam, match.firstTeamScore, match.secondTeamScore)
-            res += '<br>'
-        });
-
-        res += '</tbody>' +
-            '            </table>' +
+        return
+    }
+    if (idx.includes("/team")) {
+        let i = idx.match(/\d/g).join("");
+        let resUrl = "#/team_" + i + "#/results"
+        let squadUrl = "#/team_" + i + "#/squad"
+        let res = '<div class="teams-page-cont">' +
+            '                ' +
+            '                <div class="menuBar">' +
+            '                    <a href=' + squadUrl + ' style="margin-right: 8%;color:white; text-decoration:none;">Squad List</a>' +
             '' +
-            '' +
-            '' +
-            '        </div>';
+            '                    <a href=' + resUrl + ' style="margin-right: 8%;color:white; text-decoration:none ">Results</a>' +
+            '                </div>';
+        if (idx.includes("/results")) {
+            let mainIdx = idx.match(/\d/g).join("");
+            res += '<div class="matchContainer">' +
+                '' +
+                '            <table class="matchDay-table">' +
+                '                <tbody id="tableBody">';
+            let matches = await getMatches("http://localhost:8080/getTeamMatches/", mainIdx);
+            matches.map(match => {
+                res += page1(match.firstTeam, match.secondTeam, match.firstTeamScore, match.secondTeamScore)
+                res += '<br>'
+            });
 
+            res += '</tbody>' +
+                '            </table>' +
+                '        </div>';
+
+
+            res += '</div>'
+        } else if (idx.includes("/squad")) {
+            let mainIdx = idx.match(/\d/g).join("");
+
+            let players = await getPlayers("http://localhost:8080/getPlayersByTeamId/", mainIdx);
+
+            res += '<div class="playersContent">';
+            players.map(player => {
+                res += page2(player.shirtNumber, player.name, player.position, player.nationality,
+                    player.appearances, player.cleanSheets, player.goals, player.assists);
+                res += '<br>'
+            })
+            res += '</div>'
+        }
+        res += "</div>"
 
         elem.innerHTML = res
-
     }
 
 }
