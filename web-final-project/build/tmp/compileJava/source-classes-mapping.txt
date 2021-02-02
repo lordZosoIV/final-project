@@ -6,13 +6,13 @@ com/freeuni/demo/entity/Player.java
  com.freeuni.demo.entity.Player
 com/freeuni/demo/repository/MatchRepo.java
  com.freeuni.demo.repository.MatchRepo
-com/freeuni/demo/controller/MainController.java
- com.freeuni.demo.controller.MainController
+com/freeuni/demo/entity/Match.java
+ com.freeuni.demo.entity.Match
 com/freeuni/demo/entity/Team.java
  com.freeuni.demo.entity.Team
 com/freeuni/demo/DemoApplication.java
  com.freeuni.demo.DemoApplication
 com/freeuni/demo/controller/ContentConstants.java
  com.freeuni.demo.controller.ContentConstants
-com/freeuni/demo/entity/Match.java
- com.freeuni.demo.entity.Match
+com/freeuni/demo/controller/MainController.java
+ com.freeuni.demo.controller.MainController

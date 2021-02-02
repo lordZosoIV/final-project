@@ -25,6 +25,8 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.10.0'
     compile 'org.jsoup:jsoup:1.13.1'
     compile 'com.googlecode.json-simple:json-simple:1.1.1'
+    runtimeOnly 'mysql:mysql-connector-java'
+
 
 }
 

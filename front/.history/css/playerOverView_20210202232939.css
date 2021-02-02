@@ -1,0 +1,70 @@
+.playerCard {
+    width: 250px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* background-color: #D2B48C; */
+    border-radius: 5px;
+    margin: 20px;
+    border-color: black;
+    border-style: solid;
+    font-family: monospace;
+}
+
+.playersContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.playersContent .squadPlayerHeader {
+    background: #eceaea;
+    background-image: url(../data/logo/stats-card.png);
+    /* background-position: 100% 0; */
+    display: flex;
+    flex-direction: row;
+}
+
+.playerCardInfo {
+    /* position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: left;
+    display: inline-block;
+    vertical-align: middle; */
+    /* margin-left: auto; */
+    padding-left: 0.6vw;
+}
+
+.player-img {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: auto;
+    width: 9vw;
+}
+
+.playerCard li {
+    border-bottom: 3px solid #e8e8e8;
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+}
+
+.playerCard li div {
+    margin-left: 3%;
+    color: #76766f;
+}
+
+.playerCard li span {
+    margin-right: 3%;
+    margin-left: auto;
+    font-size: 1.2vw;
+}
+
+.squadPlayerStats {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.2vw;
+}

@@ -62,6 +62,13 @@ public class MainController {
 
     @GetMapping(value = "/getPlayersByTeamId/{id}")
     public List<Player> getPlayersByTeamId(@PathVariable String id) {
+        if (playerRepo.count() == 0) {
+            try {
+                fetchPlayers();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         return playerRepo.getPlayersByTeamId(id);
     }
 
@@ -84,7 +91,8 @@ public class MainController {
     }
 
     @GetMapping(value = "/getMatchDay/{id}")
-    public List<Match> getMatchDay(@PathVariable Long id) {
+    public List<Match> getMatchDay(@PathVariable Long id) throws IOException, ParseException {
+        if(matchRepo.count() == 0) addMatches();
         List<Match>  res = matchRepo.getMatchByMatchDayOrderByFirstTeamId(id);
         List<Match> r = new ArrayList<>();
         for (int i = 0; i < res.size(); i++) {
