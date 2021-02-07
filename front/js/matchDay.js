@@ -1,7 +1,6 @@
 async function getByURL(url, day) {
     url += day;
     return await get(url).then(function(response) {
-        response = JSON.parse(response)
         return response;
     }, function(error) {
         console.error("fetch teams failed!", error);

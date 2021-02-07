@@ -35,27 +35,18 @@ async function loadTeamLogos() {
 
 loadTeamLogos();
 
-function get(url) {
-    return new Promise(function(resolve, reject) {
-        var req = new XMLHttpRequest();
-        req.open('GET', url);
-        req.onload = function() {
-            if (req.status == 200) {
-                resolve(req.response);
-            } else {
-                reject(Error(req.statusText));
-            }
-        };
-        req.onerror = function() {
-            reject(Error("Network Error"));
-        };
-        req.send();
-    });
+async function get(url) {
+    try {
+        let res = await fetch(url);
+        return await res.json();
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 async function getTeams(url) {
     return await get(url).then(function(response) {
-        response = JSON.parse(response)
+        console.log(response)
         return response;
     }, function(error) {
         console.error("fetch teams failed!", error);
