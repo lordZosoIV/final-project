@@ -102,6 +102,11 @@ public class MainController {
         return r;
     }
 
+    @GetMapping(value = "/getMatchById/{id}")
+    public Match getMatchById(@PathVariable Integer id){
+        return matchRepo.findById(id).orElse(null);
+    }
+
     @GetMapping(value = "/getTeamMatches/{id}")
     public List<Match> getTeamMatches(@PathVariable Integer id) {
         List<Match> res = matchRepo.getMatchByFirstTeamIdOrSecondTeamIdOrderByMatchDayDesc(id, id);

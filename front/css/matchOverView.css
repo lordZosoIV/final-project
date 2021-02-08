@@ -147,7 +147,7 @@
     padding-: 20vh;
 } */
 
-.hoverYes:hover {
+.singleMatch:hover {
     background: linear-gradient(270deg, #ff2882, #963cff);
 }
 

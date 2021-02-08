@@ -1,5 +1,5 @@
-async function getByURL(url, day) {
-    url += day;
+async function getByURL(url, idx) {
+    url += idx;
     return await get(url).then(function(response) {
         return response;
     }, function(error) {
@@ -20,7 +20,9 @@ async function getMatches(url, i) {
         firstTeam = firstTeam.teamName
         let secondTeam = await getTeams("http://localhost:8080/getTeamById/" + resp[i].secondTeamId)
         secondTeam = secondTeam.teamName
-        res.push({ firstTeam, firstTeamScore, secondTeam, secondTeamScore });
+        let id = resp[i].id
+        let day = resp[i].matchDay
+        res.push({ firstTeam, firstTeamScore, secondTeam, secondTeamScore, id, day });
     }
     return res;
 }

@@ -15,43 +15,10 @@ async function addTable() {
         }
         let gd = 2 * i;
         let pi = 16;
-        html += '<tr><td>' + pos + '</td><td><img class="logo" src="../data/logo/' + resp[i].teamName + '.png"></img><div id=standing_' + resp[i].id + '>' + team + '</div></td><td>' + pi + '</td><td>' + gd + '</td><td>' + points + '</td></tr>';
+        html += '<tr><td>' + pos + '</td><td><img class="logo" src="../data/logo/' + resp[i].teamName + '.png"></img><div class="yle" id=' + resp[i].id + '>' + team + '</div></td><td>' + pi + '</td><td>' + gd + '</td><td>' + points + '</td></tr>';
 
 
     }
     elem.innerHTML = html
-    var modal = document.getElementById("myModal");
-
-    for (i = 0; i < resp.length; i++) {
-        let tn = 'standing_'
-        tn += resp[i].id;
-        var btn = document.getElementById(tn);
-
-
-        var span = document.getElementsByClassName("close")[0];
-
-
-        btn.addEventListener('click', function(event) {
-            let val = event.target.id;
-            let iof = val.indexOf('_');
-            let idx = val.substr(iof + 1, val.length - iof)
-            let club = resp.filter(function(item) {
-                return item.id == idx
-            }).map(item => item.teamName)[0]
-            let elem = document.getElementById("modalText");
-            elem.innerHTML = idx + club;
-            modal.style.display = "block";
-        })
-
-        span.addEventListener('click', function() {
-            modal.style.display = "none";
-        })
-
-        window.addEventListener('click', function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        })
-    }
 
 }

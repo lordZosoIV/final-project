@@ -46,7 +46,6 @@ async function get(url) {
 
 async function getTeams(url) {
     return await get(url).then(function(response) {
-        console.log(response)
         return response;
     }, function(error) {
         console.error("fetch teams failed!", error);

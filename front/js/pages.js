@@ -17,48 +17,39 @@ let page0 = '<div class="mid-container">' +
     '                        </tbody>' +
     '                    </table>' +
     '                </div>' +
-    '                <div id="myModal" class="modal">' +
-    '                    <div class="modal-content">' +
-    '                        <span class="close">&times;</span>' +
-    '                        <p id="modalText">Some text in the Modal..</p>' +
+    '                <div class="mid-container-center">' +
+    '<div>' +
+    '' +
+    '            <div id="carousel" class="carousel">' +
+    '                <div class="slides">' +
+    '                    <div class="slide" data-state="active">' +
+    '                        <div style="width: 100%; height: 10%; color: #37003c; margin-top: 1%;">From Zero To Hero</div>' +
+    '                        <img src="https://resources.premierleague.com/photos/premierleague/photo/2021/02/07/d2d70aa5-da96-44c7-abc4-2a3f3c1b5037/1300856182.jpg?width=1350&height=759"' +
+    '                            width="100%" height="500vh" alt="The Scream">' +
+    '                    </div>' +
+    '                    <div class="slide" data-state="active">' +
+    '                        <div style="width: 100%; height: 10%; color: #37003c; margin-top: 1%;">KLOPP SHOCK - Tough day for Liverpool</div>' +
+    '                        <img src="https://resources.premierleague.com/photos/premierleague/photo/2021/02/07/593efd8e-fb2e-4100-976d-b0af0eefcd8a/1300864565.jpg?width=1350&height=759"' +
+    '                            width="100%" height="88.5%" alt="The Scream">' +
+    '                    </div>' +
+    '                    <div class="slide" data-state="active">' +
+    '                        <div style="width: 100%; height: 10%; color: #37003c; margin-top: 1%;">FOX, WOLF, WOLF - Wolves edging it. Just</div>' +
+    '                        <img src="https://resources.premierleague.com/photos/premierleague/photo/2021/02/07/69f988e1-9a8e-46d3-9ef3-551f6e2772c7/1300829523.jpg?width=1350&height=759"' +
+    '                            width="100%" height="88.5%" alt="The Scream">' +
     '                    </div>' +
     '                </div>' +
-    '                <div class="mid-container-center">'+
-    '<div>'+
-''+
-'            <div id="carousel" class="carousel">'+
-'                <div class="slides">'+
-'                    <div class="slide" data-state="active">'+
-'                        <div style="width: 100%; height: 10%; color: #37003c; margin-top: 1%;">From Zero To Hero</div>'+
-'                        <img src="https://resources.premierleague.com/photos/premierleague/photo/2021/02/07/d2d70aa5-da96-44c7-abc4-2a3f3c1b5037/1300856182.jpg?width=1350&height=759"'+
-'                            width="100%" height="500vh" alt="The Scream">'+
-'                    </div>'+
-'                    <div class="slide" data-state="active">'+
-'                        <div style="width: 100%; height: 10%; color: #37003c; margin-top: 1%;">KLOPP SHOCK - Tough day for Liverpool</div>'+
-'                        <img src="https://resources.premierleague.com/photos/premierleague/photo/2021/02/07/593efd8e-fb2e-4100-976d-b0af0eefcd8a/1300864565.jpg?width=1350&height=759"'+
-'                            width="100%" height="88.5%" alt="The Scream">'+
-'                    </div>'+
-'                    <div class="slide" data-state="active">'+
-'                        <div style="width: 100%; height: 10%; color: #37003c; margin-top: 1%;">FOX, WOLF, WOLF - Wolves edging it. Just</div>'+
-'                        <img src="https://resources.premierleague.com/photos/premierleague/photo/2021/02/07/69f988e1-9a8e-46d3-9ef3-551f6e2772c7/1300829523.jpg?width=1350&height=759"'+
-'                            width="100%" height="88.5%" alt="The Scream">'+
-'                    </div>'+
-'                </div>'+
-'                <div class="indicators">'+
-'                    <input class="indicator" name="indicator" data-slide="1" data-state="active" checked type="radio" />'+
-'                    <input class="indicator" name="indicator" data-slide="2" type="radio" />'+
-'                    <input class="indicator" name="indicator" data-slide="3" type="radio" />'+
-'                </div>'+
-'            </div>'+
-''+
-''+
-''+
-'        </div>'
-    +'</div>' +
-    '                <div id="myBtn" hidden="true">Open Modal</div>' +
-    '            </div>';
+    '                <div class="indicators">' +
+    '                    <input class="indicator" name="indicator" data-slide="1" data-state="active" checked type="radio" />' +
+    '                    <input class="indicator" name="indicator" data-slide="2" type="radio" />' +
+    '                    <input class="indicator" name="indicator" data-slide="3" type="radio" />' +
+    '                </div>' +
+    '            </div>' +
+    '' +
+    '' +
+    '' +
+    '        </div>';
 
-let page1 = (team1, team2, score1, score2) => {
+let page1 = (id, team1, team2, score1, score2) => {
     return '<tr>' +
         '                        <td style="position: relative; padding-left: 5vw;">' +
         '                            <div class="stadium">OLD TRAFFORD</div>' +
@@ -66,7 +57,7 @@ let page1 = (team1, team2, score1, score2) => {
         '                        </td>' +
         '                    </tr>' +
         '                    <tr style="height: 1vh;"></tr>' +
-        '                    <tr class="hoverYes">' +
+        '                    <tr class="singleMatch" id="' + id + '">' +
         '                        <td style="text-align:right; margin-right: 10px;">' +
         '                            <div class="team">' +
         '                                <div>' + team1 + '</div>' +
@@ -152,7 +143,7 @@ async function renderPage(elem, idx) {
         '            <table class="matchDay-table">' +
         '                <tbody id="tableBody">';
 
-
+    let flag = 0;
     if (idx == 0) {
         console.log("asd")
         elem.innerHTML = page0
@@ -163,7 +154,7 @@ async function renderPage(elem, idx) {
     if (1 <= idx && idx < days.length + 1) {
         let matches = await getMatches("http://localhost:8080/getMatchDay/", idx);
         matches.map(match => {
-            res += page1(match.firstTeam, match.secondTeam, match.firstTeamScore, match.secondTeamScore)
+            res += page1(match.id, match.firstTeam, match.secondTeam, match.firstTeamScore, match.secondTeamScore)
             res += '<br>'
         });
 
@@ -171,8 +162,19 @@ async function renderPage(elem, idx) {
             '            </table>' +
             '        </div>';
 
+        res += '                <div id="myModal" class="modal">' +
+            '                    <div class="modal-content">' +
+            '                        <span class="close">&times;</span>' +
+            '                        <p id="modalText">Some text in the Modal..</p>' +
+            '                    </div>' +
+            '                </div><br>';
+        res += '</div>' +
+            '                <div id="myBtn" hidden="true">Open Modal</div>' +
+            '            </div>'
+
 
         elem.innerHTML = res
+        addModal();
         return
     }
     if (idx.includes("/team")) {
@@ -194,7 +196,7 @@ async function renderPage(elem, idx) {
                 '                <tbody id="tableBody">';
             let matches = await getMatches("http://localhost:8080/getTeamMatches/", mainIdx);
             matches.map(match => {
-                res += page1(match.firstTeam, match.secondTeam, match.firstTeamScore, match.secondTeamScore)
+                res += page1(match.id, match.firstTeam, match.secondTeam, match.firstTeamScore, match.secondTeamScore)
                 res += '<br>'
             });
 
@@ -203,7 +205,18 @@ async function renderPage(elem, idx) {
                 '        </div>';
 
 
-            res += '</div>'
+            res += '</div><br>'
+            res += '                <div id="myModal" class="modal">' +
+                '                    <div class="modal-content">' +
+                '                        <span class="close">&times;</span>' +
+                '                        <p id="modalText">Some text in the Modal..</p>' +
+                '                    </div>' +
+                '                </div><br>';
+            res += '</div>' +
+                '                <div id="myBtn" hidden="true">Open Modal</div>' +
+                '            </div>'
+            console.log("vipppppppppppppppppp")
+            flag = 1;
         } else if (idx.includes("/squad")) {
             let mainIdx = idx.match(/\d/g).join("");
 
@@ -220,6 +233,7 @@ async function renderPage(elem, idx) {
         res += "</div>"
 
         elem.innerHTML = res
+        if (flag === 1) addModal();
     }
 
 }
