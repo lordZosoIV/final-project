@@ -85,6 +85,10 @@ let page1 = (id, team1, team2, score1, score2) => {
 
 }
 
+function getPlayerCard(player){
+    return page2(player.shirtNumber, player.name, player.position, player.nationality,
+        player.appearances, player.cleanSheets, player.goals, player.assists);
+}
 
 let page2 = (shirtNumber, name, position, nationality, appearances, cleanSheets, goals, assists) => {
     return '                <div class="playerCard">' +

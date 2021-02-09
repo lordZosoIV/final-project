@@ -1,7 +1,7 @@
-com/freeuni/demo/repository/TeamRepo.java
- com.freeuni.demo.repository.TeamRepo
-com/freeuni/demo/repository/PlayerRepo.java
- com.freeuni.demo.repository.PlayerRepo
+com/freeuni/demo/controller/ContentConstants.java
+ com.freeuni.demo.controller.ContentConstants
+com/freeuni/demo/entity/Statistic.java
+ com.freeuni.demo.entity.Statistic
 com/freeuni/demo/entity/Player.java
  com.freeuni.demo.entity.Player
 com/freeuni/demo/repository/MatchRepo.java
@@ -12,7 +12,9 @@ com/freeuni/demo/entity/Team.java
  com.freeuni.demo.entity.Team
 com/freeuni/demo/DemoApplication.java
  com.freeuni.demo.DemoApplication
-com/freeuni/demo/controller/ContentConstants.java
- com.freeuni.demo.controller.ContentConstants
+com/freeuni/demo/repository/TeamRepo.java
+ com.freeuni.demo.repository.TeamRepo
+com/freeuni/demo/repository/PlayerRepo.java
+ com.freeuni.demo.repository.PlayerRepo
 com/freeuni/demo/controller/MainController.java
  com.freeuni.demo.controller.MainController

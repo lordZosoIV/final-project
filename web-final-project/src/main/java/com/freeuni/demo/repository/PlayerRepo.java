@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface PlayerRepo extends JpaRepository<Player, Integer> {
     List<Player> getPlayersByTeamId(String teamId);
+    List<Player> getPlayersByTeamIdOrderByGoalsDesc(String teamId);
+    List<Player> getPlayerByTeamIdOrderByGoalsDesc(String teamId);
 }

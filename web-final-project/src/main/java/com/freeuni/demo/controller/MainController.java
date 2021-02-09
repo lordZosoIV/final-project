@@ -2,6 +2,7 @@ package com.freeuni.demo.controller;
 
 import com.freeuni.demo.entity.Match;
 import com.freeuni.demo.entity.Player;
+import com.freeuni.demo.entity.Statistic;
 import com.freeuni.demo.entity.Team;
 import com.freeuni.demo.repository.MatchRepo;
 import com.freeuni.demo.repository.PlayerRepo;
@@ -102,9 +103,88 @@ public class MainController {
         return r;
     }
 
-    @GetMapping(value = "/getMatchById/{id}")
-    public Match getMatchById(@PathVariable Integer id){
-        return matchRepo.findById(id).orElse(null);
+    @GetMapping(value = "/getMatchStatsById/{id}")
+    public Statistic getMatchById(@PathVariable Integer id){
+        Match m = matchRepo.findById(id).orElse(null);
+        if(m == null) return null;
+
+        String firstTeamName = teamRepo.getTeamById(m.getFirstTeamId()).getTeamName();
+        String secondTeamName = teamRepo.getTeamById(m.getSecondTeamId()).getTeamName();
+
+
+        Integer firstTeam = m.getFirstTeamId();
+        Integer secondTeam = m.getSecondTeamId();
+
+        int score1 = Math.toIntExact(m.getFirstTeamScore());
+        int score2 = Math.toIntExact(m.getSecondTeamScore());
+
+
+        ArrayList<Player> arr1 = (ArrayList<Player>) playerRepo.getPlayersByTeamIdOrderByGoalsDesc(firstTeam.toString());
+        ArrayList<Player> goals1 = new ArrayList<>();
+        for(int i = 0; i < score1; i++){
+            goals1.add(arr1.get(i));
+        }
+
+        ArrayList<Player> arr2 = (ArrayList<Player>) playerRepo.getPlayersByTeamIdOrderByGoalsDesc(secondTeam.toString());
+        ArrayList<Player> goals2 = new ArrayList<>();
+        for(int i = 0; i < score2; i++){
+            goals2.add(arr2.get(i));
+        }
+
+        Player mvp = new Player();
+        if(goals1.size() > 0) mvp = goals1.get(0);
+        else if(goals2.size() > 0) mvp = goals2.get(0);
+        else mvp = playerRepo.getPlayerByTeamIdOrderByGoalsDesc(firstTeam.toString()).get(0);
+
+        Random r = new Random();
+        int low = 30;
+        int high = 70;
+        int result = r.nextInt(high-low) + low;
+
+        double score1Percentage = result;
+        double score2Percentage = 100 - result;
+
+        int firstTeamShots = score1 + 2;
+        int secondTeamShots = score2 + 3;
+
+        double firstTeamShotsPercentage = (double) (100 * firstTeamShots) / (firstTeamShots + secondTeamShots);
+        double secondTeamShotsPercentage = (double)(100 * secondTeamShots) / (firstTeamShots + secondTeamShots);
+
+        int firstTeamShotsOnTarget = score1 + 1;
+        int secondTeamShotsOnTarget = score2 + 1;
+
+        double firstTeamShotsOnTargetPercentage = (double)(100 * firstTeamShotsOnTarget) / (firstTeamShotsOnTarget + secondTeamShotsOnTarget);
+        double secondTeamShotsOnTargetPercentage = (double)(100 * secondTeamShotsOnTarget) / (firstTeamShotsOnTarget + secondTeamShotsOnTarget);
+
+
+        int firstTeamAttack = firstTeamShotsOnTarget * 4;
+        int secondTeamAttack = secondTeamShotsOnTarget * 5;
+
+        double firstTeamAttackPercentage = (double)(100 * firstTeamAttack) /(firstTeamAttack + secondTeamAttack);
+        double secondTeamAttackPercentage = (double)(100 * secondTeamAttack) /(firstTeamAttack + secondTeamAttack);
+
+        int firstTeamOffSides = score1 + 1;
+        int secondTeamOffSides = score2 + 1;
+
+        double firstTeamOffSidesPercentage = (double)(100 * firstTeamOffSides) / (firstTeamOffSides + secondTeamOffSides);
+        double secondTeamOffSidesPercentage = (double)(100 * secondTeamOffSides) / (firstTeamOffSides + secondTeamOffSides);
+
+
+        int firstTeamSaves = Math.max(score2, 2);
+        int secondTeamSaves = Math.max(score1, 1);
+
+        double firstTeamSavesPercentage = (double)(100 * firstTeamSaves) / (secondTeamSaves + firstTeamSaves);
+        double secondTeamSavesPercentage = (double)(100 * secondTeamSaves) / (secondTeamSaves + firstTeamSaves);
+
+        Statistic s = new Statistic(firstTeamName, secondTeamName, score1, score2, score1Percentage, score2Percentage,
+                firstTeamShots, secondTeamShots, firstTeamShotsPercentage, secondTeamShotsPercentage,
+                firstTeamShotsOnTarget, secondTeamShotsOnTarget, firstTeamShotsOnTargetPercentage, secondTeamShotsOnTargetPercentage,
+                firstTeamAttack, secondTeamAttack, firstTeamAttackPercentage, secondTeamAttackPercentage,
+                firstTeamOffSides, secondTeamOffSides, firstTeamOffSidesPercentage, secondTeamOffSidesPercentage,
+                firstTeamSaves, secondTeamSaves, firstTeamSavesPercentage, secondTeamSavesPercentage,
+                goals1, goals2, mvp);
+
+        return s;
     }
 
     @GetMapping(value = "/getTeamMatches/{id}")
