@@ -85,7 +85,7 @@ let page1 = (id, team1, team2, score1, score2) => {
 
 }
 
-function getPlayerCard(player){
+function getPlayerCard(player) {
     return page2(player.shirtNumber, player.name, player.position, player.nationality,
         player.appearances, player.cleanSheets, player.goals, player.assists);
 }
@@ -187,7 +187,7 @@ async function renderPage(elem, idx) {
         let squadUrl = "#/team_" + i + "#/squad"
         let res = '<div class="teams-page-cont">' +
             '                ' +
-            '                <div class="menuBar">' +
+            '                <div class="teamContentMenu">' +
             '                    <a href=' + squadUrl + ' style="margin-right: 8%;color:white; text-decoration:none;">Squad List</a>' +
             '' +
             '                    <a href=' + resUrl + ' style="margin-right: 8%;color:white; text-decoration:none ">Results</a>' +

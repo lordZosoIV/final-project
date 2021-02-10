@@ -56,14 +56,17 @@ async function getTeams(url) {
 
 async function loadTeamsDropDown() {
     const url = 'http://localhost:8080/getAllTeams';
-    let elem = document.getElementById("dropdown-content-clubs")
+    let elem = document.getElementsByClassName("dropdown-content-clubs")
     let resp = await getTeams(url);
     let html = '';
     for (i = 0; i < resp.length; i++) {
         let link = "#/team_" + resp[i].id
         html += '<a href=' + link + ' id=menuTeamIndex' + resp[i].id + ' style="font-size: small;">' + resp[i].teamName + '</a><br>';
     }
-    elem.innerHTML = html
+    for (let e of elem) {
+        console.log("Asddddddddd")
+        e.innerHTML = html;
+    }
 }
 
 

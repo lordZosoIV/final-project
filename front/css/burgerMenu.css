@@ -1,0 +1,103 @@
+.navbar {
+    display: none;
+}
+
+@media only screen and (min-width: 500px) {
+    .navbar {
+        display: none;
+        color: red;
+    }
+}
+
+.ham {
+    display: none;
+}
+
+@media only screen and (max-width: 500px) {
+    .ham {
+        display: block;
+        position: relative;
+        /* always keep ham on top of everything */
+        z-index: 100000;
+        top: 12%;
+        left: 46%;
+        width: 36px;
+        height: 36px;
+        border: none;
+        cursor: pointer;
+        background-color: transparent;
+        background-image: url("https://ljc-dev.github.io/testing0/ham.svg");
+        background-size: 100%;
+    }
+    .menuBar {
+        display: none;
+    }
+    /* change ham image to close */
+    .showClose {
+        display: inline-block;
+        content: "\00d7";
+        z-index: 100000000000;
+        color: red;
+    }
+    .navbar {
+        z-index: 100000;
+        /* display: block; */
+        position: relative;
+        /* display: flex; */
+        /* top: 10vh; */
+        /* left: 16%; */
+        background: #37003c;
+        width: 100%;
+        /* height: 300px; */
+        overflow: hidden;
+        color: white;
+        /* hide the menu above the screen by default */
+        transform: translateY(-100%);
+        /* transition adds a little animation when sliding in and out the menu */
+        transition: transform 0.2s ease;
+    }
+    .showNav {
+        /* show the menu */
+        transform: translateY(0);
+    }
+    .showNav div {
+        cursor: pointer;
+    }
+    /* basic nav styling below */
+    .navbar ul {
+        width: 100%;
+        height: 100%;
+        list-style: none;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-evenly;
+        margin-left: 30%;
+    }
+    .navbar ul li a {
+        color: white;
+        padding-bottom: 10px;
+        border-bottom: 2px solid black;
+        text-decoration: none;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1.2rem;
+    }
+    .navbar ul li a:hover,
+    .navbar ul li a:focus {
+        border-bottom: 2px solid white;
+    }
+    .left-header img {
+        display: none;
+    }
+    .right-header {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .left-header {
+        display: none;
+    }
+    #burger-dropdown-content-clubs {
+        color: red;
+    }
+}

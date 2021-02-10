@@ -2,7 +2,6 @@ async function addTable() {
     const url = 'http://localhost:8080/getAllTeams';
     let resp = await getTeams(url);
     let elem = document.getElementById("tableBody");
-    console.log(elem)
     let html = '';
     for (i = 0; i < resp.length; i++) {
         let pos = i;
