@@ -75,27 +75,31 @@ function getMatchStats(content) {
 
 
 function getmatchScorers(content) {
-    let html = '<div class="playersModalView">'
-        + '<div class="scoresFromEachTeam"> '
-        + '<img style="width: 8rem; height: 8rem;" src="../data/logo/' + content.firstTeamName + '.png"></img>'
-        + '<div class="playersContentForModal">'
+    let html = '<div class="playersModalView">' +
+        '<div class="scoresFromEachTeam"> ' +
+        '<img style="width: 8rem; height: 8rem;" src="../data/logo/' + content.firstTeamName + '.png"></img>' +
+        '<div class="playersContentForModal">'
     content.firstTeamGoals.length === 0 ? html += '<h3>Unlucky day for ' + content.firstTeamName + '</h3>' :
         content.firstTeamGoals.map(p => html += getPlayerCard(p))
-        html += '</div>'
+    html += '</div>'
 
-    + '</div> '
+    +
+    '</div> '
 
-        + '<div class="scoresFromEachTeam"> '
-        + '<img style="width: 8rem; height: 8rem;" src="../data/logo/' + content.secondTeamName + '.png"></img>'
+    +
+    '<div class="scoresFromEachTeam"> ' +
+    '<img style="width: 8rem; height: 8rem;" src="../data/logo/' + content.secondTeamName + '.png"></img>'
 
 
-    + '<div class="playersContentForModal">';
+    +
+    '<div class="playersContentForModal">';
     content.secondTeamGoals.length === 0 ? html += '<h3>Unlucky day for ' + content.secondTeamName + '</h3>' :
         content.secondTeamGoals.map(p => html += getPlayerCard(p))
-        html += '</div>'
-    + '</div> '
+    html += '</div>' +
+        '</div> '
 
-        + '</div>';
+    +
+    '</div>';
     return html;
 }
 
@@ -109,66 +113,49 @@ function getMatchMVP(content) {
 
 async function addModal() {
     var modal = document.getElementById("myModal");
-
-    var btns = document.getElementsByClassName("singleMatch");
+    var btns = document.getElementsByClassName("currentMatch");
     var span = document.getElementsByClassName("close")[0];
-
     for (i = 0; i < btns.length; i++) {
-        let childs = btns[i].getElementsByTagName('*')
-        for (let btn of childs) {
-            let parentId = btns[i].id
-            let content = await getByURL("http://localhost:8080/getMatchStatsById/", parentId)
-            btn.addEventListener('click', function () {
-                console.log(content)
-                // let iof = val.indexOf('_');
-                // let idx = val.substr(iof + 1, val.length - iof)
-                // let club = btns.filter(function (item) {
-                //     return item.id == idx
-                // }).map(item => item.teamName)[0]
-                let elem = document.getElementById("modalText");
-                elem.innerHTML = '<div class="matchStatistic"><h3>' + content.firstTeamName + ' ' + content.score1 + ' - ' + content.score2 + ' ' + content.secondTeamName + '</h3><br>' +
-                    '<div class="modalHeader">' +
-                    '<div id="stats">Stats</div>' +
-                    '<div id="scorers">Scorers</div>' +
-                    '<div id="mvp">MVP</div>' +
-                    '</div>' +
-                    '<div id="modal-main-container"></div>' +
-                    '        </div>';
-                document.getElementById("modal-main-container").innerHTML = getMatchStats(content);
-                modal.style.display = "block";
+        let btn = btns[i];
+        let parentId = btns[i].id
+        let content = await getByURL("http://localhost:8080/getMatchStatsById/", parentId)
+        btn.addEventListener('click', function() {
+            console.log(content)
+            let elem = document.getElementById("modalText");
+            elem.innerHTML = '<div class="matchStatistic"><h3>' + content.firstTeamName + ' ' + content.score1 + ' - ' + content.score2 + ' ' + content.secondTeamName + '</h3><br>' +
+                '<div class="modalHeader">' +
+                '<div id="stats">Stats</div>' +
+                '<div id="scorers">Scorers</div>' +
+                '<div id="mvp">MVP</div>' +
+                '</div>' +
+                '<div id="modal-main-container"></div>' +
+                '        </div>';
+            document.getElementById("modal-main-container").innerHTML = getMatchStats(content);
+            modal.style.display = "block";
 
-                document.getElementById("scorers").addEventListener('click', function () {
-                    document.getElementById("modal-main-container").innerHTML = getmatchScorers(content);
-                })
-
-                document.getElementById("stats").addEventListener('click', function () {
-                    document.getElementById("modal-main-container").innerHTML = getMatchStats(content);
-                })
-
-                document.getElementById("mvp").addEventListener('click', function () {
-                    document.getElementById("modal-main-container").innerHTML = getMatchMVP(content);
-                })
-
+            document.getElementById("scorers").addEventListener('click', function() {
+                document.getElementById("modal-main-container").innerHTML = getmatchScorers(content);
             })
-        }
+
+            document.getElementById("stats").addEventListener('click', function() {
+                document.getElementById("modal-main-container").innerHTML = getMatchStats(content);
+            })
+
+            document.getElementById("mvp").addEventListener('click', function() {
+                document.getElementById("modal-main-container").innerHTML = getMatchMVP(content);
+            })
+
+        })
 
 
-    }
-
-    // document.getElementById("scorers").addEventListener('click', function(){
-    //     document.getElementById("modal-main-container").innerHTML = getmatchScorers(content);
-    // })
-
-
-
-
-    span.addEventListener('click', function () {
-        modal.style.display = "none";
-    })
-
-    window.addEventListener('click', function (event) {
-        if (event.target == modal) {
+        span.addEventListener('click', function() {
             modal.style.display = "none";
-        }
-    })
+        })
+
+        window.addEventListener('click', function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        })
+    }
 }

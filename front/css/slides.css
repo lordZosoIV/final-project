@@ -1,16 +1,18 @@
 .carousel {
     position: relative;
-    height: 70vh;
+    height: 60vh;
     width: 100%;
-  }
-  
-  .slides {
+    background-color: rgb(240, 238, 234);
+    background-image: url(../data/logo/stats-card.png);
+}
+
+.slides {
     height: 100%;
     width: 100%;
     position: relative;
-  }
-  
-  .slide {
+}
+
+.slide {
     position: absolute;
     top: 0;
     left: 0;
@@ -21,24 +23,22 @@
     text-align: center;
     opacity: 0;
     transition: opacity 1000ms;
-  }
-  
-  .slide:nth-child(1) {
-      opacity: 1;
-  }
-  
-  
-  
-  .slide[data-state=active] {
+}
+
+.slide:nth-child(1) {
+    opacity: 1;
+}
+
+.slide[data-state=active] {
     display: block;
-  }
-  
-  .indicators {
+}
+
+.indicators {
     position: absolute;
     bottom: 20px;
     right: 20px;
-  }
-  
-  .indicator {
-      cursor: pointer;
-  }
+}
+
+.indicator {
+    cursor: pointer;
+}

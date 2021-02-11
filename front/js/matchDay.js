@@ -1,5 +1,6 @@
 async function getByURL(url, idx) {
     url += idx;
+    console.log(url)
     return await get(url).then(function(response) {
         return response;
     }, function(error) {

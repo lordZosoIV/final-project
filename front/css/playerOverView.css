@@ -1,5 +1,5 @@
 .playerCard {
-    width: 15vw;
+    width: 250px;
     max-width: 100%;
     display: flex;
     flex-direction: column;
@@ -42,7 +42,7 @@
     display: inline-block;
     vertical-align: middle;
     margin-left: auto;
-    width: 7vw;
+    width: 6rem;
 }
 
 .playerCard li {
@@ -60,11 +60,17 @@
 .playerCard li span {
     margin-right: 3%;
     margin-left: auto;
-    font-size: 1.2vw;
+    font-size: 20;
 }
 
 .squadPlayerStats {
     display: flex;
     flex-direction: column;
-    font-size: 1.2vw;
+    font-size: 20;
+}
+
+@media only screen and (max-width: 600px) {
+    .squadPlayerStats {
+        display: none;
+    }
 }

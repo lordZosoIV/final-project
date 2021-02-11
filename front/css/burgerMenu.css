@@ -20,7 +20,7 @@
         /* always keep ham on top of everything */
         z-index: 100000;
         top: 12%;
-        left: 46%;
+        /* left: 46%; */
         width: 36px;
         height: 36px;
         border: none;
@@ -28,6 +28,10 @@
         background-color: transparent;
         background-image: url("https://ljc-dev.github.io/testing0/ham.svg");
         background-size: 100%;
+        background-color: white;
+        border-radius: 10px;
+        clear: both;
+        float: left;
     }
     .menuBar {
         display: none;
@@ -60,8 +64,18 @@
         /* show the menu */
         transform: translateY(0);
     }
-    .showNav div {
+    .showNav div a {
         cursor: pointer;
+        color: wheat
+    }
+    .showNav ul>div {
+        cursor: pointer;
+    }
+    .showNav ul>div {
+        padding-bottom: 10%;
+    }
+    .showNav ul>a {
+        padding-bottom: 10%;
     }
     /* basic nav styling below */
     .navbar ul {
@@ -71,7 +85,7 @@
         display: flex;
         flex-flow: column nowrap;
         justify-content: space-evenly;
-        margin-left: 30%;
+        margin-left: 23%;
     }
     .navbar ul li a {
         color: white;
@@ -97,7 +111,28 @@
     .left-header {
         display: none;
     }
-    #burger-dropdown-content-clubs {
-        color: red;
+    #burger-div {
+        border: 3px solid #ff2882;
+        background-color: #37003c;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: row;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #chosen {
+        display: flex;
+        color: white;
+        /* position: relative; */
+        z-index: 100000;
+        /* top: 1vh; */
+        left: inherit;
+        /* margin-left: 10%; */
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        vertical-align: middle;
+        width: 90%;
     }
 }

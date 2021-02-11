@@ -1,9 +1,13 @@
 .table {
-    width: 30%;
+    width: 280px;
     background-color: lightsteelblue;
     display: flex;
     flex-direction: column;
-    height: 72vh;
+    border-radius: 10px;
+    border: 3px solid black;
+    margin-top: 10px;
+    margin-left: 15px;
+    margin-right: 8px;
 }
 
 .table-header {
@@ -44,7 +48,9 @@
     /* padding: 0.4vw 0.2vw; */
     margin-left: 1%;
     z-index: 5000;
-    font-size: 2.5vh;
+    font-size: 15;
+    padding: 0 10px;
+    /* height: 30px; */
     /* text-align: center; */
 }
 
@@ -93,3 +99,15 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.last-week-mvp {
+    margin-left: 10%;
+    margin-right: 10%;
+    border: 3px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    margin-top: 10px;
+    border-radius: 10px;
+}

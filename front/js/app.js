@@ -64,7 +64,6 @@ async function loadTeamsDropDown() {
         html += '<a href=' + link + ' id=menuTeamIndex' + resp[i].id + ' style="font-size: small;">' + resp[i].teamName + '</a><br>';
     }
     for (let e of elem) {
-        console.log("Asddddddddd")
         e.innerHTML = html;
     }
 }

@@ -3,12 +3,13 @@
 <head>
     <link rel="stylesheet" href="./../css/MainStyle.css">
     <link rel="stylesheet" href="./../css/standings.css">
-    <link rel="stylesheet" href="./../css/matchOverView.css">
+    <!-- <link rel="stylesheet" href="./../css/matchOverView.css"> -->
     <link rel="stylesheet" href="./../css/playerOverView.css">
     <link rel="stylesheet" href="./../css/teams.css">
     <link rel="stylesheet" href="./../css/slides.css">
     <link rel="stylesheet" href="./../css/modal.css">
     <link rel="stylesheet" href="./../css/burgerMenu.css">
+    <link rel="stylesheet" href="./../css/matches.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
@@ -39,22 +40,34 @@
                         <div id="dropdown-content-matchDays">
                         </div>
                     </div>
-                    <a href="#/Fantasy" style="margin-right: 8%;color:white; text-decoration:none ">Fantasy</a>
+                </div>
+
+                <div id="burger-div">
+                    <button class="ham"></button>
+                    <div id="chosen">Home</div>
                 </div>
 
 
-                <button class="ham"></button>
-
                 <nav class="navbar" id="burger">
                     <ul>
-                        <a href="#/Home" style="margin-right: 8%;color:white; text-decoration:none;">Home</a>
-                        <div class="dropdown">
-                            <span class="teamsDD" id="match-days-burger">Teams</span>
+                        <a href="#/Home" style="color:white; text-decoration:none;" id="burger-home">Home</a>
+
+                        <div class="dropdown" id="teams-burger">
+                            <span class="teamsDD">Teams</span>
                             <i class="arrow down"></i>
                             <div class="dropdown-content-clubs" id="burger-dropdown-content-clubs">
                             </div>
                         </div>
-                        <a href="#/Fantasy" style="margin-right: 8%;color:white; text-decoration:none ">Fantasy</a>
+
+
+
+                        <div class="dropdown" id="days-burger">
+                            <span class="matchDaysDD">Match Days</span>
+                            <i class="arrow down"></i>
+                            <div class="dropdown-content-days" id="burger-dropdown-content-clubs">
+                            </div>
+                        </div>
+
                     </ul>
                 </nav>
 
@@ -63,7 +76,6 @@
 
         </div>
         <div class="supMid"></div>
-
     </div>
 
 
