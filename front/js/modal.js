@@ -1,3 +1,6 @@
+import {getByURL} from './app.js'
+import {getPlayerCard} from './players.js'
+
 function getMatchStats(content) {
     return '<div>Ball Position</div>' +
         '            <div id="stat-child">' +
@@ -105,16 +108,17 @@ function getmatchScorers(content) {
 
 
 function getMatchMVP(content) {
-    res = '<div class="playersContent">';
+    let res = '<div class="playersContent">';
     res += getPlayerCard(content.mvp)
     res += '</div>'
     return res
 }
 
-async function addModal() {
+export async function addModal() {
     var modal = document.getElementById("myModal");
     var btns = document.getElementsByClassName("currentMatch");
     var span = document.getElementsByClassName("close")[0];
+    let i;
     for (i = 0; i < btns.length; i++) {
         let btn = btns[i];
         let parentId = btns[i].id

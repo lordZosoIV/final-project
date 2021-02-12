@@ -48,7 +48,7 @@ function switchSlide() {
     carouselShow(nextSlide);
 }
 
-function startSlideShow() {
+export function startSlideShow() {
     carousel =  document.getElementById('carousel');
     if (carousel) {
         slides = carousel.querySelectorAll('.slide');

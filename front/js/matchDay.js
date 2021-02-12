@@ -1,16 +1,9 @@
-async function getByURL(url, idx) {
-    url += idx;
-    console.log(url)
-    return await get(url).then(function(response) {
-        return response;
-    }, function(error) {
-        console.error("fetch teams failed!", error);
-        return error;
-    })
-}
+import {getByURL} from './app.js'
+import {getTeams} from './app.js'
+import {addModal} from './modal.js';
 
 
-async function getMatches(url, i) {
+export async function getMatches(url, i) {
     let resp = await getByURL(url, i);
     // console.log(resp)
     let res = [];
@@ -28,8 +21,56 @@ async function getMatches(url, i) {
     return res;
 }
 
+export let renderSingleMatch = (id, team1, team2, score1, score2) => {
+    return '<div class="currentMatch" id=' + id + '>' +
+        '' +
+        '                <div class="stadium">' +
+        '                    OLD TRAFFORD' +
+        '                    <img class="stadium-logo" src="../data/logo/stadium.png"></img>' +
+        '                    <div class="match-leauge-logo">' +
+        '                        <img style="width: 12vw; height: 2rem; vertical-align: middle;" src="../data/logo/premier-league-3-logo.png "></img>' +
+        '' +
+        '                    </div>' +
+        '                </div>' +
+        '' +
+        '                <div class="match-teams">' +
+        '                    <div class="home-team">' +
+        '                        ' + team1 +
+        '                    </div>' +
+        '                    <img style="width: 2rem; height: 2rem; vertical-align: middle; margin-right: 4px;" src="../data/logo/' + team1 + '.png"></img>' +
+        '                    <div class="home-team-score">' + score1 + '</div>' +
+        '                    <div class="away-team-score">' + score2 + '</div>' +
+        '                    <img style="width: 2rem; height: 2rem; vertical-align: middle; margin-left: 4px;" src="../data/logo/' + team2 + '.png"></img>' +
+        '                    <div class="away-team">' +
+        '                        ' + team2 +
+        '                    </div>' +
+        '                </div>' +
+        '' +
+        '' +
+        '            </div>';;
 
 
+}
 
+export let renderMatchDayContent = async (elem, idx) => {
+    let res = '<div class="matchday-title"><h2>MatchDay ' + idx  +  'th scores<h2></div><div class="matchContent">';
+    let matches = await getMatches("http://localhost:8080/getMatchDay/", idx);
+    console.log(idx)
+    matches.map(match => {
+        res += renderSingleMatch(match.id, match.firstTeam, match.secondTeam, match.firstTeamScore, match.secondTeamScore)
+        res += '<br>'
+    });
+    res += '</div>'
+    res += '                <div id="myModal" class="modal">' +
+        '                    <div class="modal-content">' +
+        '                        <span class="close">&times;</span>' +
+        '                        <p id="modalText">Some text in the Modal..</p>' +
+        '                    </div>' +
+        '                </div><br>';
+    res +=          '</div>' +
+        '                <div id="myBtn" hidden="true">Open Modal</div>' +
+        '            </div>'
 
-// getMatchDay();
+    elem.innerHTML = res
+    addModal();
+}

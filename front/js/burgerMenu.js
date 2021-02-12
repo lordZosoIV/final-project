@@ -1,9 +1,18 @@
+
+import {getTeams} from './app.js'
+
+
 let navbar = document.querySelector(".navbar")
 let ham = document.querySelector(".ham")
 let open = 0
 let teamsDown = 0;
 let daysDown = 0;
 let chosen = document.getElementById("chosen");
+
+
+export function getChosesItem(){
+    return chosen;
+}
 
 
 function toggleHamburger() {
@@ -64,7 +73,7 @@ async function loadBurgerTeamsDropDown() {
     elem.addEventListener("click", function() {
         if (teamsDown === 0) {
             html += '<br>'
-            for (i = 0; i < resp.length; i++) {
+            for (let i = 0; i < resp.length; i++) {
                 link = "#/team_" + resp[i].id
                 html += '<a href=' + link + ' id=menuTeamIndex' + resp[i].id + ' style="font-size: small; text-decoration:none"><div>' + resp[i].teamName + '</div></a><br>';
             }
@@ -93,7 +102,7 @@ document.getElementById("burger-home").addEventListener('click', function() {
 
 async function loadBurgerDaysDropDown() {
     let days = [];
-    for (i = 1; i < 18; i++) {
+    for (let i = 1; i < 18; i++) {
         days.push("matchDay_" + i);
     }
     let elem = document.getElementById("days-burger")
@@ -104,7 +113,7 @@ async function loadBurgerDaysDropDown() {
     elem.addEventListener("click", function() {
         if (daysDown === 0) {
             html += '<br>'
-            for (i = 0; i < days.length; i++) {
+            for (let i = 0; i < days.length; i++) {
                 let link = "#/" + days[i]
                 html += '<a href=' + link + ' id=' + days[i] + ' style="font-size: small; text-decoration:none"><div>' + "matchDay " + (i+1) + '</div></a><br>';
             }

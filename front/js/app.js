@@ -1,4 +1,4 @@
-const days = [];
+export let days = [];
 
 const teamSites = ["https://www.arsenal.com/?utm_source=premier-league-website&utm_campaign=website&utm_medium=link",
     "https://www.avfc.co.uk/?utm_source=premier-league-website&utm_campaign=website&utm_medium=link",
@@ -22,11 +22,16 @@ const teamSites = ["https://www.arsenal.com/?utm_source=premier-league-website&u
     "https://www.wolves.co.uk/?utm_source=premier-league-website&utm_campaign=website&utm_medium=link"
 ]
 
+export function getDays(){
+    return days;
+}
+
 async function loadTeamLogos() {
     const url = 'http://localhost:8080/getAllTeams';
     let resp = await getTeams(url);
     let elem = document.getElementById("logosBar")
     let html = '';
+    let i;
     for (i = 0; i < resp.length; i++) {
         html += '<a href=' + teamSites[i] + ' target="_blank"><img class="logo" src="../data/logo/' + resp[i].teamName + '.png"></img></a>'
     }
@@ -35,7 +40,7 @@ async function loadTeamLogos() {
 
 loadTeamLogos();
 
-async function get(url) {
+export async function get(url) {
     try {
         let res = await fetch(url);
         return await res.json();
@@ -44,7 +49,33 @@ async function get(url) {
     }
 }
 
-async function getTeams(url) {
+
+export async function getByURL(url, idx) {
+    url += idx;
+    return await get(url).then(function(response) {
+        return response;
+    }, function(error) {
+        console.error("fetch teams failed!", error);
+        return error;
+    })
+}
+
+export async function getPlayers(url, i) {
+    let resp = await getByURL(url, i);
+    return resp;
+}
+
+
+export async function getTeamById(i) {
+    let url = 'http://localhost:8080/getTeamById/';
+    console.log(url, i)
+    let resp = await getByURL(url, i);
+    return resp.teamName;
+}
+
+
+
+export async function getTeams(url) {
     return await get(url).then(function(response) {
         return response;
     }, function(error) {
@@ -59,6 +90,7 @@ async function loadTeamsDropDown() {
     let elem = document.getElementsByClassName("dropdown-content-clubs")
     let resp = await getTeams(url);
     let html = '';
+    let i;
     for (i = 0; i < resp.length; i++) {
         let link = "#/team_" + resp[i].id
         html += '<a href=' + link + ' id=menuTeamIndex' + resp[i].id + ' style="font-size: small;">' + resp[i].teamName + '</a><br>';
@@ -75,6 +107,7 @@ loadTeamsDropDown();
 
 
 async function loadMatchDaysDropDown() {
+    let i;
     for (i = 1; i < 18; i++) {
         days.push("matchDay_" + i);
     }

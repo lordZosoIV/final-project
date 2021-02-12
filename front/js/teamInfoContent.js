@@ -21,6 +21,6 @@ const data = [Arsenal];
 
 
 
-function getTeamInfo(idx){
+export function getTeamInfo(idx){
     return data[idx].content;
 }
