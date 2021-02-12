@@ -121,6 +121,27 @@
     right: 23%;
 }
 
+.matchday-title{
+    margin: auto;
+    width: 100%;
+    height: 8vh;
+    border: 3px solid #ff2882;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    background: #37003c;
+    color: #fff;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: box-shadow .2s;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    position: relative;
+}
+
 @media only screen and (max-width: 800px) {
     .match-leauge-logo {
         display: none;

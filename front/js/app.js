@@ -82,7 +82,7 @@ async function loadMatchDaysDropDown() {
     let html = '';
     for (i = 0; i < days.length; i++) {
         let link = "#/" + days[i]
-        html += '<a href=' + link + ' id=' + days[i] + ' style="font-size: small;">' + days[i] + '</a><br>';
+        html += '<a href=' + link + ' id=' + days[i] + ' style="font-size: small;">' + "matchDay " + (i+1) + '</a><br>';
     }
     elem.innerHTML = html
 }

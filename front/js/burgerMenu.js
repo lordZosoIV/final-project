@@ -106,7 +106,7 @@ async function loadBurgerDaysDropDown() {
             html += '<br>'
             for (i = 0; i < days.length; i++) {
                 let link = "#/" + days[i]
-                html += '<a href=' + link + ' id=' + days[i] + ' style="font-size: small; text-decoration:none"><div>' + days[i] + '</div></a><br>';
+                html += '<a href=' + link + ' id=' + days[i] + ' style="font-size: small; text-decoration:none"><div>' + "matchDay " + (i+1) + '</div></a><br>';
             }
             document.getElementById("teams-burger").innerHTML = '<span class="teamsDD">Teams</span>' +
                 '<i class="arrow down"></i>' +

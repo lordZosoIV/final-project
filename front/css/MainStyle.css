@@ -207,10 +207,6 @@
     position: relative;
 }
 
-.standing-goat {
-    display: flex;
-    flex-direction: row;
-}
 
 @media only screen and (min-width: 500px) {
     .dropdown:hover {
@@ -239,4 +235,71 @@
     .left-header {
         display: none;
     }
+}
+
+
+
+
+.team-page {
+    margin-left: 5%;
+    border: 3px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    margin-top: 10px;
+    border-radius: 10px;
+    background: #eceaea;
+    background-image: url(../data/logo/stats-card.png);
+}
+
+.team-info{
+    font-weight: bold;
+    float: none;
+    color: red;
+}
+
+
+
+
+
+
+@media only screen and (max-width: 860px) {
+    .team-page {
+        /* margin-left: 0px; */
+        border: 3px solid black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 450px;
+        margin-top: 10px;
+        border-radius: 10px;
+        background: #eceaea;
+        background-image: url(../data/logo/stats-card.png);
+    }
+    
+    
+}
+
+
+
+@media only screen and (max-width: 850px){
+
+    .team-page {
+        margin-left: 0px;
+        border: 3px solid black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-top: 10px;
+        border-radius: 10px;
+        background: #eceaea;
+        background-image: url(../data/logo/stats-card.png);
+    }
+    
+    
 }

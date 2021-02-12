@@ -10,15 +10,21 @@ const removeSharp = (path) => {
     return path.substring(0, index) + path.substring(index + 1);
 }
 
-async function getTeamFromHash() {
+function getNumberFromHash(){
+    let currhash = removeSharp(location.hash.slice(1).slice(1));
+    currhash = currhash.replace(/\D/g, "");
+    return currhash
+}
+
+
+async function getFromHash() {
     let currhash = removeSharp(location.hash.slice(1).slice(1));
     if (currhash.includes("team_")) {
-        let i = currhash.indexOf("/");
-        if (i > 0)
-            currhash = currhash.substring(currhash.indexOf("_") + 1, currhash.length - i - 1);
-        else currhash = currhash.substring(currhash.indexOf("_") + 1);
+        currhash = currhash.replace(/\D/g, "");
         let team = await getTeams("http://localhost:8080/getTeamById/" + currhash);
         return team.teamName;
+    }else if(currhash.includes("matchDay")) {
+        currhash = currhash.replace("_", " ");
     }
     return currhash
 }
@@ -49,11 +55,11 @@ function router() {
 }
 window.addEventListener('hashchange', async() => {
     router()
-    chosen.innerHTML = await getTeamFromHash()
+    chosen.innerHTML = await getFromHash()
 });
 window.addEventListener('load', async() => {
     router()
-    chosen.innerHTML = await getTeamFromHash()
+    chosen.innerHTML = await getFromHash()
 });
 
 
