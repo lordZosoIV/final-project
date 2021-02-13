@@ -208,6 +208,39 @@ body {
 }
 
 
+@media only screen and (min-width: 1679px) {
+
+
+    .last-mvp {
+        margin-left: 150px;
+        border: 3px solid black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 650px;
+        margin-top: 10px;
+        border-radius: 10px;
+        background: #eceaea;
+        background-image: url(../data/logo/stats-card.png);
+    }
+    
+
+
+    .table {
+        width: 280px;
+        background-color: lightsteelblue;
+        display: flex;
+        flex-direction: column;
+        border-radius: 10px;
+        border: 3px solid black;
+        margin-top: 10px;
+        margin-left: 100px;
+        margin-right: 8px;
+    }
+    
+    
+}
 
 
 

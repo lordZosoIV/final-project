@@ -1,7 +1,8 @@
 .main-container {
     margin: auto;
     width: 70%;
-    border: 3px solid black;
+    border: 3px solid #37003c;
+    border-radius: 10px;
     /* height: 100%; */
 }
 
@@ -183,33 +184,41 @@
 }
 
 .footer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    vertical-align: middle;
-    background-color: green;
-    flex-direction: column;
-}
-
-.teamContentMenu {
-    margin: auto;
-    width: 100%;
-    height: 8vh;
-    border: 3px solid #ff2882;
+    margin-top: 3%;
+    border: 3px solid rgb(255, 40, 130);
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     vertical-align: middle;
-    background: #37003c;
-    color: #fff;
-    top: 0;
-    left: 0;
-    width: 100%;
-    transition: box-shadow .2s;
-    -webkit-backface-visibility: hidden;
+    flex-direction: column;
+    background-color: #37003c;
     backface-visibility: hidden;
-    position: relative;
+}
+
+
+
+
+.footer >div {
+    color : white
+}
+
+.footer >div > a {
+    color : white
+}
+
+
+.teamContentMenu {
+    height: 8vh;
+    border: 3px solid rgb(255, 40, 130);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    flex-direction: row;
+    background-color: #37003c;
+    backface-visibility: hidden;
 }
 
 
@@ -246,14 +255,16 @@
 
 
 .team-page {
-    margin-left: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
     border: 3px solid black;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 90%;
-    margin-top: 10px;
+    /* width: 90%; */
+    /* height: 550px; */
+    margin-top: 5%;
     border-radius: 10px;
     background: #eceaea;
     background-image: url(../data/logo/stats-card.png);

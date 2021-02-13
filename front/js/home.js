@@ -45,17 +45,17 @@ export let homePage = (elem, idx) => {
                     '                    <div class="slide" data-state="active">' +
                     '                        <div style="width: 100%; height: 10%; color: #37003c; margin-top: 1%;">From Zero To Hero</div>' +
                     '                        <img src="https://resources.premierleague.com/photos/premierleague/photo/2021/02/07/d2d70aa5-da96-44c7-abc4-2a3f3c1b5037/1300856182.jpg?width=1350&height=759"' +
-                    '                            width="100%" height="90%" alt="The Scream">' +
+                    '                            width="100%" height="88%" alt="The Scream">' +
                     '                    </div>' +
                     '                    <div class="slide" data-state="active">' +
                     '                        <div style="width: 100%; height: 10%; color: #37003c; margin-top: 1%;">KLOPP SHOCK</div>' +
                     '                        <img src="https://resources.premierleague.com/photos/premierleague/photo/2021/02/07/593efd8e-fb2e-4100-976d-b0af0eefcd8a/1300864565.jpg?width=1350&height=759"' +
-                    '                            width="100%" height="90%" alt="The Scream">' +
+                    '                            width="100%" height="88%" alt="The Scream">' +
                     '                    </div>' +
                     '                    <div class="slide" data-state="active">' +
                     '                        <div style="width: 100%; height: 10%; color: #37003c; margin-top: 1%;">FOX, WOLF, WOLF</div>' +
                     '                        <img src="https://resources.premierleague.com/photos/premierleague/photo/2021/02/07/69f988e1-9a8e-46d3-9ef3-551f6e2772c7/1300829523.jpg?width=1350&height=759"' +
-                    '                            width="100%" height="90%" alt="The Scream">' +
+                    '                            width="100%" height="88%" alt="The Scream">' +
                     '                    </div>' +
                     '                </div>' +
                     '                <div class="indicators">' +
