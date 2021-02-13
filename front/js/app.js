@@ -1,5 +1,7 @@
 export let days = [];
 
+export const api = 'http://localhost:8080';
+
 const teamSites = ["https://www.arsenal.com/?utm_source=premier-league-website&utm_campaign=website&utm_medium=link",
     "https://www.avfc.co.uk/?utm_source=premier-league-website&utm_campaign=website&utm_medium=link",
     "https://www.brightonandhovealbion.com/?utm_source=premier-league-website&utm_campaign=website&utm_medium=link",
@@ -26,19 +28,31 @@ export function getDays(){
     return days;
 }
 
+let teamsContainer;
+
 async function loadTeamLogos() {
-    const url = 'http://localhost:8080/getAllTeams';
-    let resp = await getTeams(url);
+    const url = api + '/getAllTeams';
+    teamsContainer = await getTeams(url);
     let elem = document.getElementById("logosBar")
     let html = '';
     let i;
-    for (i = 0; i < resp.length; i++) {
-        html += '<a href=' + teamSites[i] + ' target="_blank"><img class="logo" src="../data/logo/' + resp[i].teamName + '.png"></img></a>'
+    for (i = 0; i < teamsContainer.length; i++) {
+        html += '<a href=' + teamSites[i] + ' target="_blank"><img class="logo" src="../data/logo/' + teamsContainer[i].teamName + '.png"></img></a>'
     }
     elem.innerHTML = html
 }
 
 loadTeamLogos();
+
+
+export function getTeamIdByTeamName(team){
+    for(let i = 0; i < teamsContainer.length; i++){
+        let item = teamsContainer[i]
+        if(item.teamName === team) return item.id;
+    }
+    return null;
+}
+
 
 export async function get(url) {
     try {
@@ -65,15 +79,25 @@ export async function getPlayers(url, i) {
     return resp;
 }
 
+export async function getPlayerById(id) {
+    let url = api + '/getPlayerById/';
+    let resp = await getByURL(url, id);
+    return resp;
+}
+
+
 
 export async function getTeamById(i) {
-    let url = 'http://localhost:8080/getTeamById/';
-    console.log(url, i)
+    let url = api + '/getTeamById/';
     let resp = await getByURL(url, i);
     return resp.teamName;
 }
 
-
+export async function getPlayerByPattern(pattern){
+    let url = api + '/searchByPattern/';
+    let resp = await getByURL(url, pattern);
+    return resp;
+}
 
 export async function getTeams(url) {
     return await get(url).then(function(response) {
@@ -86,7 +110,7 @@ export async function getTeams(url) {
 
 
 async function loadTeamsDropDown() {
-    const url = 'http://localhost:8080/getAllTeams';
+    const url = api + '/getAllTeams';
     let elem = document.getElementsByClassName("dropdown-content-clubs")
     let resp = await getTeams(url);
     let html = '';

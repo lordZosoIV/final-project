@@ -79,6 +79,12 @@ public class MainController {
         return teamRepo.findById(id);
     }
 
+
+    @GetMapping(path = "/getPlayerById/{id}")
+    public Player getPlayerById(@PathVariable Integer id) {
+        return playerRepo.findById(id).orElse(null);
+    }
+
     @GetMapping(path = "/getAllPlayers")
     public List<Player> getAllPlayers() {
         if (playerRepo.count() == 0) {
@@ -101,6 +107,12 @@ public class MainController {
                 r.add(res.get(i));
         }
         return r;
+    }
+
+
+    @GetMapping(value = "/searchByPattern/{pattern}")
+    public List<Player> getByPattert(@PathVariable String pattern){
+        return playerRepo.searchByPattern(pattern);
     }
 
     @GetMapping(value = "/getMatchStatsById/{id}")

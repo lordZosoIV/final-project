@@ -1,8 +1,8 @@
 import {getTeams} from './app.js'
-
+import {api} from './app.js'
 
 export async function addTable() {
-    const url = 'http://localhost:8080/getAllTeams';
+    const url = api + '/getAllTeams';
     let resp = await getTeams(url);
     let elem = document.getElementById("tableBody");
     let html = '';

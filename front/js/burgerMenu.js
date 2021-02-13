@@ -1,6 +1,6 @@
 
 import {getTeams} from './app.js'
-
+import {api} from './app.js'
 
 let navbar = document.querySelector(".navbar")
 let ham = document.querySelector(".ham")
@@ -61,7 +61,7 @@ window.addEventListener("resize", function() {
 
 
 async function loadBurgerTeamsDropDown() {
-    const url = 'http://localhost:8080/getAllTeams';
+    const url = api + '/getAllTeams';
     let resp = [];
     let html = '<span class="teamsDD">Teams</span>' +
         '<i class="arrow down"></i>' +

@@ -24,10 +24,15 @@
 .left-header {
     width: 20%;
     height: 100%;
-    /* position: absolute; */
-    /* bottom: 0; */
-    /* left: 0; */
+    /* vertical-align: middle; */
+    margin: auto;
 }
+
+/* .left-header {
+    width: 20%;
+    height: 28vh;
+    margin: auto;
+} */
 
 .left-header img {
     width: 100%;
@@ -303,3 +308,20 @@
     
     
 }
+
+
+@media only screen and (max-height: 750px){
+
+        .left-header {
+        width: 20%;
+        height: 28vh;
+        margin: auto;
+    }
+    
+}
+
+
+
+
+
+

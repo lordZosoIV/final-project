@@ -2,9 +2,10 @@ import {getMatches} from './matchDay.js';
 import {addModal} from './modal.js';
 import {getTeamInfo} from './teamInfoContent.js'
 import {getPlayers} from './app.js'
-import {renderPlayerCard} from './players.js'
+import {getPlayerCard} from './players.js'
 import {renderSingleMatch} from './matchDay.js'
 import {getTeamById} from './app.js'
+import {api} from './app.js'
 
 export let renderTeamHomeSimplePage = async (elem, idx) => {
     let i = idx;
@@ -49,7 +50,7 @@ export let renderTeamHomeSimplePage = async (elem, idx) => {
 
     
         elem.innerHTML = res;
-        document.getElementById("team-info").innerHTML = getTeamInfo(0)  
+        document.getElementById("team-info").innerHTML = getTeamInfo(team)  
 }
 
 
@@ -71,7 +72,7 @@ let res = '<div class="teams-page-cont">' +
 
                 '<div>';
 res += '<div class="matchContent">';
-let matches = await getMatches("http://localhost:8080/getTeamMatches/", mainIdx);
+let matches = await getMatches(api + "/getTeamMatches/", mainIdx);
 matches.map(match => {
     res += renderSingleMatch(match.id, match.firstTeam, match.secondTeam, match.firstTeamScore, match.secondTeamScore)
     res += '<br>'
@@ -110,14 +111,14 @@ let res = '<div class="teams-page-cont">' +
 
                 '<div>';
 
-    let players = await getPlayers("http://localhost:8080/getPlayersByTeamId/", mainIdx);
+    let players = await getPlayers(api + "/getPlayersByTeamId/", mainIdx);
     
     res += '<div class="playersContent">';
-    players.map(player => {
-        res += renderPlayerCard(player.shirtNumber, player.name, player.position, player.nationality,
-        player.appearances, player.cleanSheets, player.goals, player.assists);
-            res += '<br>'
-    })
+    for(let i = 0; i < players.length; i++){
+        let player = players[i];
+        res += await getPlayerCard(player);
+        res += '<br>'
+    }
     res += '</div>'
     elem.innerHTML = res
 }

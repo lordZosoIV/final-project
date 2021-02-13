@@ -1,5 +1,6 @@
 import {getByURL} from './app.js'
 import {getPlayerCard} from './players.js'
+import {api} from './app.js'
 
 function getMatchStats(content) {
     return '<div>Ball Position</div>' +
@@ -77,13 +78,21 @@ function getMatchStats(content) {
 }
 
 
-function getmatchScorers(content) {
+
+
+
+async function getmatchScorers(content) {
     let html = '<div class="playersModalView">' +
         '<div class="scoresFromEachTeam"> ' +
         '<img style="width: 8rem; height: 8rem;" src="../data/logo/' + content.firstTeamName + '.png"></img>' +
         '<div class="playersContentForModal">'
-    content.firstTeamGoals.length === 0 ? html += '<h3>Unlucky day for ' + content.firstTeamName + '</h3>' :
-        content.firstTeamGoals.map(p => html += getPlayerCard(p))
+    if(content.firstTeamGoals.length === 0){
+       html += '<div><h3>Unlucky day for ' + content.firstTeamName + '</h3></div>' 
+    }else 
+    {  for(let i = 0; i < content.firstTeamGoals.length; i++){
+            html += await getPlayerCard(content.firstTeamGoals[i])
+       }
+    }
     html += '</div>'
 
     +
@@ -96,8 +105,13 @@ function getmatchScorers(content) {
 
     +
     '<div class="playersContentForModal">';
-    content.secondTeamGoals.length === 0 ? html += '<h3>Unlucky day for ' + content.secondTeamName + '</h3>' :
-        content.secondTeamGoals.map(p => html += getPlayerCard(p))
+    if(content.secondTeamGoals.length === 0){
+        html += '<div><h3>Unlucky day for ' + content.secondTeamName + '</h3></div>' 
+    }else {  
+         for(let i = 0; i < content.secondTeamGoals.length; i++){
+            html += await getPlayerCard(content.secondTeamGoals[i])
+        }
+     }
     html += '</div>' +
         '</div> '
 
@@ -107,9 +121,9 @@ function getmatchScorers(content) {
 }
 
 
-function getMatchMVP(content) {
+async function getPlayerInModal(content) {
     let res = '<div class="playersContent">';
-    res += getPlayerCard(content.mvp)
+    res += await getPlayerCard(content)
     res += '</div>'
     return res
 }
@@ -118,13 +132,11 @@ export async function addModal() {
     var modal = document.getElementById("myModal");
     var btns = document.getElementsByClassName("currentMatch");
     var span = document.getElementsByClassName("close")[0];
-    let i;
-    for (i = 0; i < btns.length; i++) {
+    for (let i = 0; i < btns.length; i++) {
         let btn = btns[i];
         let parentId = btns[i].id
-        let content = await getByURL("http://localhost:8080/getMatchStatsById/", parentId)
+        let content = await getByURL(api + "/getMatchStatsById/", parentId)
         btn.addEventListener('click', function() {
-            console.log(content)
             let elem = document.getElementById("modalText");
             elem.innerHTML = '<div class="matchStatistic"><h3>' + content.firstTeamName + ' ' + content.score1 + ' - ' + content.score2 + ' ' + content.secondTeamName + '</h3><br>' +
                 '<div class="modalHeader">' +
@@ -137,16 +149,16 @@ export async function addModal() {
             document.getElementById("modal-main-container").innerHTML = getMatchStats(content);
             modal.style.display = "block";
 
-            document.getElementById("scorers").addEventListener('click', function() {
-                document.getElementById("modal-main-container").innerHTML = getmatchScorers(content);
+            document.getElementById("scorers").addEventListener('click', async function() {
+                document.getElementById("modal-main-container").innerHTML = await getmatchScorers(content);
             })
 
             document.getElementById("stats").addEventListener('click', function() {
                 document.getElementById("modal-main-container").innerHTML = getMatchStats(content);
             })
 
-            document.getElementById("mvp").addEventListener('click', function() {
-                document.getElementById("modal-main-container").innerHTML = getMatchMVP(content);
+            document.getElementById("mvp").addEventListener('click', async function() {
+                document.getElementById("modal-main-container").innerHTML = await getPlayerInModal(content.mvp);
             })
 
         })
@@ -163,3 +175,33 @@ export async function addModal() {
         })
     }
 }
+
+
+export async function addModalForSearchedPlayer(player){
+    var modal = document.getElementById("myModal");
+    var span = document.getElementsByClassName("close")[0];
+  
+    let content = player
+    let elem = document.getElementById("modalText");
+    elem.innerHTML = '<div class="matchStatistic"><h3> Search Result For ' + player.name + '</h3><br>' +
+                    '</div>' +
+                   '<div id="modal-main-container"></div>' +
+                 '        </div>';
+    modal.style.display = "block";
+
+    document.getElementById("modal-main-container").innerHTML = await getPlayerInModal(content);
+    document.getElementById("dropdown-content-search").style.display = "none";
+    document.getElementById("search-cont").value = "";
+
+    span.addEventListener('click', function() {
+        modal.style.display = "none";
+    })
+
+     window.addEventListener('click', function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+         }
+    })
+}
+
+

@@ -7,6 +7,7 @@ import {renderMatchDayContent} from './matchDay.js'
 import {renderTeamHomeSimplePage} from './team.js'
 import {renderTeamResults} from './team.js'
 import {renderTeamSquad} from './team.js'
+import {api} from './app.js'
 
 
 
@@ -23,7 +24,7 @@ async function getFromHash() {
     let currhash = removeSharp(location.hash.slice(1).slice(1));
     if (currhash.includes("team_")) {
         currhash = currhash.replace(/\D/g, "");
-        let team = await getTeams("http://localhost:8080/getTeamById/" + currhash);
+        let team = await getTeams(api + "/getTeamById/" + currhash);
         return team.teamName;
     }else if(currhash.includes("matchDay")) {
         currhash = currhash.replace("_", " ");

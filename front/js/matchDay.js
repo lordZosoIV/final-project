@@ -1,6 +1,8 @@
 import {getByURL} from './app.js'
 import {getTeams} from './app.js'
 import {addModal} from './modal.js';
+import {api} from './app.js'
+import {stadium} from './teamInfoContent.js'
 
 
 export async function getMatches(url, i) {
@@ -10,9 +12,9 @@ export async function getMatches(url, i) {
     for (i = 0; i < resp.length; i++) {
         let firstTeamScore = resp[i].firstTeamScore
         let secondTeamScore = resp[i].secondTeamScore
-        let firstTeam = await getTeams("http://localhost:8080/getTeamById/" + resp[i].firstTeamId)
+        let firstTeam = await getTeams(api + "/getTeamById/" + resp[i].firstTeamId)
         firstTeam = firstTeam.teamName
-        let secondTeam = await getTeams("http://localhost:8080/getTeamById/" + resp[i].secondTeamId)
+        let secondTeam = await getTeams(api + "/getTeamById/" + resp[i].secondTeamId)
         secondTeam = secondTeam.teamName
         let id = resp[i].id
         let day = resp[i].matchDay
@@ -25,7 +27,7 @@ export let renderSingleMatch = (id, team1, team2, score1, score2) => {
     return '<div class="currentMatch" id=' + id + '>' +
         '' +
         '                <div class="stadium">' +
-        '                    OLD TRAFFORD' +
+        '                    ' + stadium[team1]  +
         '                    <img class="stadium-logo" src="../data/logo/stadium.png"></img>' +
         '                    <div class="match-leauge-logo">' +
         '                        <img style="width: 12vw; height: 2rem; vertical-align: middle;" src="../data/logo/premier-league-3-logo.png "></img>' +
@@ -54,7 +56,7 @@ export let renderSingleMatch = (id, team1, team2, score1, score2) => {
 
 export let renderMatchDayContent = async (elem, idx) => {
     let res = '<div class="matchday-title"><h2>MatchDay ' + idx  +  'th scores<h2></div><div class="matchContent">';
-    let matches = await getMatches("http://localhost:8080/getMatchDay/", idx);
+    let matches = await getMatches(api + "/getMatchDay/", idx);
     console.log(idx)
     matches.map(match => {
         res += renderSingleMatch(match.id, match.firstTeam, match.secondTeam, match.firstTeamScore, match.secondTeamScore)
