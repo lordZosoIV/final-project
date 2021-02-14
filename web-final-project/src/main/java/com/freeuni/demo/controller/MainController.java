@@ -216,7 +216,7 @@ public class MainController {
                new Standing(9, "Leicester City",
                        17,		32),
 
-               new Standing(16, "Tottenham HotSpurs",
+               new Standing(16, "Tottenham Hotspur",
                        16,		29),
 
                new Standing(11, "Manchester City",
@@ -238,7 +238,7 @@ public class MainController {
 
 
 
-               new Standing(18, "West Ham",
+               new Standing(18, "West Ham United",
                        17,		26),
 
                new Standing(0, "Arsenal",
