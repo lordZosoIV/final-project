@@ -10,7 +10,7 @@ function ImageExist(src){
 
 
 export let renderPlayerCard =  (team, shirtNumber, name, position, nationality, appearances, cleanSheets, goals, assists) => {
-    let src = "../data/players/" + name + "/image_1.jpg";
+    let src = "../data/players/" + name + "/Image_1.jpg";
     let exists = ImageExist(name);
     let teamId = getTeamIdByTeamName(team);
     if(!exists) src = "../data/players/Avatar/avatar.png"
