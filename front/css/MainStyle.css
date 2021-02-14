@@ -227,7 +227,11 @@
 @media only screen and (min-width: 500px) {
     .dropdown:hover {
         cursor: pointer;
+        -webkit-transform: scale(1.3);
         transform: scale(1.3);
+        -webkit-transition: .3s ease-in-out;
+        transition: .3s ease-in-out;
+        /* overflow: hidden; */
     }
     .dropdown:hover .dropdown-content-clubs {
         display: block;
@@ -238,7 +242,7 @@
     }
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 950px) {
     .left-header img {
         display: none;
     }

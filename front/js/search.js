@@ -40,12 +40,14 @@ document.getElementById("search-cont").addEventListener('keyup',  async function
 
 
 document.getElementById("dropdown-content-search").addEventListener('mouseout', function() {
+    console.log("out " + Date.now())
     document.getElementById("dropdown-content-search").style.display = "none"
     // document.getElementById("search-cont").value = ""
 });
 
 
 document.getElementById("dropdown-content-search").addEventListener('mouseover', function() {
+    console.log("in " + Date.now())
     document.getElementById("dropdown-content-search").style.display = "block";
     document.getElementById("search-cont").value = name;
 });
