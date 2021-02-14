@@ -53,7 +53,7 @@ public class MainController {
     @GetMapping(path = "/getAllTeams")
     public List<Team> getAllTeams() throws IOException, ParseException {
         if (teamRepo.count() == 0) {
-            if(matchRepo.count() == 0) addMatches();
+//            if(matchRepo.count() == 0) addMatches();
             for (int i = 0; i < ContentConstants.teams.size(); i++) {
                 teamRepo.save(new Team(i, ContentConstants.teams.get(i)));
             }
