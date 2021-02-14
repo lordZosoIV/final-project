@@ -30,6 +30,7 @@ async function searchEvent(event){
     name = pattern;
     if (pattern.length < 3) return;
     let values = await getPlayerByPattern(pattern);
+    if(values.length === 0) document.getElementById("dropdown-content-search").style.display = "none"
     renderNames(values)
 }
 

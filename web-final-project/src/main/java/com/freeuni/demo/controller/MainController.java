@@ -51,8 +51,9 @@ public class MainController {
     }
 
     @GetMapping(path = "/getAllTeams")
-    public List<Team> getAllTeams() {
+    public List<Team> getAllTeams() throws IOException, ParseException {
         if (teamRepo.count() == 0) {
+            if(matchRepo.count() == 0) addMatches();
             for (int i = 0; i < ContentConstants.teams.size(); i++) {
                 teamRepo.save(new Team(i, ContentConstants.teams.get(i)));
             }
@@ -86,8 +87,9 @@ public class MainController {
     }
 
     @GetMapping(path = "/getAllPlayers")
-    public List<Player> getAllPlayers() {
+    public List<Player> getAllPlayers() throws IOException, ParseException {
         if (playerRepo.count() == 0) {
+            if(matchRepo.count() == 0) addMatches();
             try {
                 fetchPlayers();
             } catch (IOException e) {
@@ -300,8 +302,10 @@ public class MainController {
         String assists = "0";
         Elements ell = e.getElementsByTag("dl");
         for (Element infos : ell) {
-
-            String info = infos.text().substring(0, infos.text().indexOf(' '));
+            String demo = infos.text();
+            String info = "Nationality";
+            if(demo.indexOf(' ') > 0)
+                info = infos.text().substring(0, infos.text().indexOf(' '));
             switch (info) {
                 case "Nationality":
                     String ag = infos.text().substring(infos.text().indexOf(' ') + 1);
