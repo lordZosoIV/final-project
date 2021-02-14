@@ -62,6 +62,12 @@ public class MainController {
     }
 
 
+    @GetMapping(path = "/hello")
+    public String h() throws IOException, ParseException {
+        return "hello";
+    }
+
+
     @GetMapping(value = "/getPlayersByTeamId/{id}")
     public List<Player> getPlayersByTeamId(@PathVariable String id) {
         if (playerRepo.count() == 0) {

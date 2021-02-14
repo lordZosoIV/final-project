@@ -1,6 +1,6 @@
 export let days = [];
 
-export const api = 'http://localhost:8080';
+export const api = 'https://frozen-ridge-66526.herokuapp.com/';
 
 const teamSites = ["https://www.arsenal.com/?utm_source=premier-league-website&utm_campaign=website&utm_medium=link",
     "https://www.avfc.co.uk/?utm_source=premier-league-website&utm_campaign=website&utm_medium=link",
