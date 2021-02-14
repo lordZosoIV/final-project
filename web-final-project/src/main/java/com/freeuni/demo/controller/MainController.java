@@ -1,9 +1,6 @@
 package com.freeuni.demo.controller;
 
-import com.freeuni.demo.entity.Match;
-import com.freeuni.demo.entity.Player;
-import com.freeuni.demo.entity.Statistic;
-import com.freeuni.demo.entity.Team;
+import com.freeuni.demo.entity.*;
 import com.freeuni.demo.repository.MatchRepo;
 import com.freeuni.demo.repository.PlayerRepo;
 import com.freeuni.demo.repository.TeamRepo;
@@ -20,7 +17,6 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -205,6 +201,74 @@ public class MainController {
                 goals1, goals2, mvp);
 
         return s;
+    }
+
+    @GetMapping(value = "/getStandings")
+    public List<Standing> getS() {
+       return new ArrayList<>(Arrays.asList(
+               new Standing(10,
+                       "Liverpool",
+                       17,		33),
+
+               new Standing(12, "Manchester United",
+                       16,	33),
+
+               new Standing(9, "Leicester City",
+                       17,		32),
+
+               new Standing(16, "Tottenham HotSpurs",
+                       16,		29),
+
+               new Standing(11, "Manchester City",
+                       15,		29),
+
+               new Standing(15, "Southampton",
+                       17,		29),
+
+
+               new Standing(6, "Everton",
+                       16,		29),
+
+               new Standing(1, "Aston Villa",
+                       15,		26),
+
+
+               new Standing(4, "Chelsea",
+                       17,		26),
+
+
+
+               new Standing(18, "West Ham",
+                       17,		26),
+
+               new Standing(0, "Arsenal",
+                       17,		23),
+
+               new Standing(8, "Leeds United",
+                       17,		23),
+
+               new Standing(19, "Wolverhampton Wanderer" ,17 ,22),
+
+               new Standing(5, "Crystal Palace",
+                       17,		22),
+
+               new Standing(13, "Newcastle United", 16, 19),
+
+               new Standing(3 ,"Burnley",
+                       15,		16),
+
+
+               new Standing(2, "Brighton and Hove Albion",
+                       17,		14),
+
+               new Standing(7, "Fulham",
+                       15,		11),
+
+               new Standing(17, "West Bromwich Albion", 17, 8),
+
+               new Standing(14, "Sheffield United", 17,2)
+
+       ));
     }
 
     @GetMapping(value = "/getTeamMatches/{id}")
