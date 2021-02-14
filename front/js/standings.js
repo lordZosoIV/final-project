@@ -17,7 +17,9 @@ export async function addTable() {
         }
         let pi = resp[i].pl;
         html += '<tr><td>' + pos + '</td><td><img class="logo" src="../data/logo/' + resp[i].name +
-            '.png"></img><div  id=' + resp[i].id + '>' + team + '</div></td><td>' + pi + '</td><td>' + points + '</td></tr>';
+            '.png"></img><div  id=' + resp[i].id + '>' + 
+            '<a href="#/team_'+resp[i].id+'" style="text-decoration: none; color:black;">'+team+'</a>'+
+            '</div></td><td>' + pi + '</td><td>' + points + '</td></tr>';
 
     }
     elem.innerHTML = html

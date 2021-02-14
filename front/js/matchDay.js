@@ -55,9 +55,11 @@ export let renderSingleMatch = (id, team1, team2, score1, score2) => {
 }
 
 export let renderMatchDayContent = async (elem, idx) => {
-    let res = '<div class="matchday-title"><h2>MatchDay ' + idx  +  'th scores<h2></div><div class="matchContent">';
+    let res = '<div class="matchday-title"><h2>MatchDay ' + idx  +  'th scores<h2></div>';'<div class="matchContent">';
+    res += '<div class="loader" style="display: block;"></div>';
+    elem.innerHTML = res
+    res += '<div class="matchContent">';
     let matches = await getMatches(api + "/getMatchDay/", idx);
-    console.log(idx)
     matches.map(match => {
         res += renderSingleMatch(match.id, match.firstTeam, match.secondTeam, match.firstTeamScore, match.secondTeamScore)
         res += '<br>'
@@ -74,5 +76,6 @@ export let renderMatchDayContent = async (elem, idx) => {
         '            </div>'
 
     elem.innerHTML = res
+    document.getElementsByClassName("loader")[0].style.display = "none";
     addModal();
 }

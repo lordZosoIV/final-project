@@ -27,7 +27,7 @@ export let renderPlayerCard =  (team, shirtNumber, name, position, nationality, 
         '                    <div class="squadPlayerStats">' +
         '                        <li>' +
         '                            <div></a>Club</div>' +
-        '                            <a href="#/team_'+teamId+'"style="text-decoration: none; color:black; margin-right: 3%;margin-left: auto;font-size: 20;">'+team+'</a>' +
+        '                            <a href="#/team_'+teamId+'" style="text-decoration: none; color:black; margin-right: 3%;margin-left: auto;font-size: 20;">'+team+'</a>' +
         '                        </li>' +
         '                        <li>' +
         '                            <div>Country</div>' +

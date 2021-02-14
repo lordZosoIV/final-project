@@ -71,6 +71,9 @@ let res = '<div class="teams-page-cont">' +
 
 
                 '<div>';
+res += '<div class="loader" style="display: block;"></div>'            
+elem.innerHTML = res
+
 res += '<div class="matchContent">';
 let matches = await getMatches(api + "/getTeamMatches/", mainIdx);
 matches.map(match => {
@@ -90,6 +93,7 @@ res += '</div>' +
     '            </div>'
 elem.innerHTML = res
 addModal()
+document.getElementsByClassName("loader")[0].style.display = "none";
 }
 
 
@@ -110,6 +114,9 @@ let res = '<div class="teams-page-cont">' +
 
 
                 '<div>';
+    res += '<div class="loader" style="display: block;"></div>'            
+    elem.innerHTML = res
+    
 
     let players = await getPlayers(api + "/getPlayersByTeamId/", mainIdx);
     
@@ -120,5 +127,6 @@ let res = '<div class="teams-page-cont">' +
         res += '<br>'
     }
     res += '</div>'
-    elem.innerHTML = res
+    elem.innerHTML = res;
+    document.getElementsByClassName("loader")[0].style.display = "none";
 }
