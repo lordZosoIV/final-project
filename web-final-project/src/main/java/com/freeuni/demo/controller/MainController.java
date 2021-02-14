@@ -247,7 +247,7 @@ public class MainController {
                new Standing(8, "Leeds United",
                        17,		23),
 
-               new Standing(19, "Wolverhampton Wanderer" ,17 ,22),
+               new Standing(19, "Wolverhampton Wanderers" ,17 ,22),
 
                new Standing(5, "Crystal Palace",
                        17,		22),

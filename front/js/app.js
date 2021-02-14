@@ -109,6 +109,13 @@ export async function getTeams(url) {
 }
 
 
+export async function getStandings(){
+    let url = api + '/getStandings/';
+    let resp = await getByURL(url, "");
+    return resp;
+}
+
+
 async function loadTeamsDropDown() {
     const url = api + '/getAllTeams';
     let elem = document.getElementsByClassName("dropdown-content-clubs")
