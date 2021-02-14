@@ -25,19 +25,22 @@ function renderNames(players) {
 }
 
 
-
-document.getElementById("search-cont").addEventListener('keyup', async function(event) {
+async function searchEvent(event){
     let pattern = event.target.value;
     name = pattern;
     if (pattern.length < 3) return;
     let values = await getPlayerByPattern(pattern);
     renderNames(values)
+}
+
+document.getElementById("search-cont").addEventListener('keyup',  async function(event){
+    searchEvent(event);   
 })
 
 
 document.getElementById("dropdown-content-search").addEventListener('mouseout', function() {
     document.getElementById("dropdown-content-search").style.display = "none"
-    document.getElementById("search-cont").value = ""
+    // document.getElementById("search-cont").value = ""
 });
 
 
@@ -45,3 +48,8 @@ document.getElementById("dropdown-content-search").addEventListener('mouseover',
     document.getElementById("dropdown-content-search").style.display = "block";
     document.getElementById("search-cont").value = name;
 });
+
+
+document.getElementById("search-cont").addEventListener('mouseenter',  async function(event){
+    searchEvent(event);   
+})
